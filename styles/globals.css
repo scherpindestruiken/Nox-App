@@ -11,24 +11,30 @@
 
 /* Algemene opmaak */
 body {
-  @apply text-nox-gold font-sans;
+  @apply bg-nox-black text-nox-gold font-sans;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Mobiele achtergrond (standaard) */
-body {
-  background-image: url('/images/NOX_home.jpg');
+/* Mobiele achtergrond */
+.bg-custom-mobile {
+  background-image: url('/images/NOX_staand.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* Desktop achtergrond */
 @media (min-width: 768px) {
-  body {
-    background-image: url('/images/NOX_home_desktop.png');
+  .bg-custom-desktop {
+    background-image: url('/images/NOX_zittendachterboomzondercamera.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
   }
 }
