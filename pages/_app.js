@@ -1,14 +1,15 @@
-// pages/_app.js
-import Head from 'next/head';
+import { useEffect } from 'react';
 import '../styles/globals.css';
 
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Component {...pageProps} />
-    </>
-  );
+export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
+  return <Component {...pageProps} />;
 }
