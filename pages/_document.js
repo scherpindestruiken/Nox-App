@@ -12,6 +12,13 @@ export default function Document() {
         {/* Splashscreens */}
         <link rel="apple-touch-startup-image" href="/splash/splash-mobile.png" media="(max-device-width: 768px)" />
         <link rel="apple-touch-startup-image" href="/splash/splash-desktop.png" media="(min-device-width: 769px)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-iphonex.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-iphone12.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-iphone8plus.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-iphone8.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-iphoneSE.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-ipad.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+<link rel="apple-touch-startup-image" href="/splash/splash-ipadpro.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
       </Head>
       <body>
         <Main />
