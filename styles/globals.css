@@ -2,39 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Eigen kleuren */
 :root {
   --nox-black: #0f0f0f;
   --nox-gold: #e0c066;
   --nox-gray: #1e1e1e;
 }
 
-/* Algemene opmaak */
 body {
   @apply bg-nox-black text-nox-gold font-sans;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
-/* Mobiele achtergrond */
-.bg-custom-mobile {
-  background-image: url('/images/NOX_staand.jpeg');
+.bg-custom {
+  background-image: url('/images/NOX_home.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
 }
 
-/* Desktop achtergrond */
 @media (min-width: 768px) {
-  .bg-custom-desktop {
-    background-image: url('/images/NOX_zittendachterboomzondercamera.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
+  .bg-custom {
+    background-image: url('/images/NOX_home_desktop.png');
   }
 }
