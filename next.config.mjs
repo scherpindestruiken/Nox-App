@@ -1,8 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    formats: ['image/avif', 'image/webp'], // Alleen deze twee zijn toegestaan
-  },
-};
+// next.config.mjs
+import withPWA from 'next-pwa'
 
-export default nextConfig;
+const isDev = process.env.NODE_ENV === 'development'
+
+const baseConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: [],
+  },
+}
+
+const nextConfig = withPWA({
+  dest: 'public',
+  disable: isDev,
+})(baseConfig)
+
+export default nextConfig

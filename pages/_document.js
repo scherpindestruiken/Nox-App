@@ -1,24 +1,17 @@
-// pages/_document.js
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
     <Html lang="nl">
       <Head>
-        {/* PWA primary color */}
-        <meta name="theme-color" content="#0f0f0f" />
-
-        {/* Web App Manifest */}
+        <meta name="theme-color" content="#000000" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <link rel="icon" href="/favicon.ico" />
 
-        {/* Favicon */}
-        <link rel="icon" href="/icons/NOX_achterboom.png" type="image/png" />
-
-        {/* Apple-specific tags */}
-        <link rel="apple-touch-icon" href="/icons/NOX_camera.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Nox" />
+        {/* Splashscreens */}
+        <link rel="apple-touch-startup-image" href="/splash/splash-mobile.png" media="(max-device-width: 768px)" />
+        <link rel="apple-touch-startup-image" href="/splash/splash-desktop.png" media="(min-device-width: 769px)" />
       </Head>
       <body>
         <Main />
