@@ -5,17 +5,25 @@ export default function Document() {
   return (
     <Html lang="nl">
       <Head>
-        {/* Basis PWA meta */}
-        <meta name="theme-color" content="#000000" />
+        {/* PWA instellingen */}
+        <meta name="theme-color" content="#0e1f18" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/icon-192-v2.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="/icon-512-v2.png" />
 
-        {/* iOS splashscreens */}
+        {/* Splashscreen iPhone 15 */}
         <link
           rel="apple-touch-startup-image"
-          href="/splash/splash-iphoneSE.png"
-          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+          href="/splash/splash-iphone15-v2.jpeg"
+          media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
+        />
+
+        {/* Andere iPhones (optioneel) */}
+        <link
+          rel="apple-touch-startup-image"
+          href="/splash/splash-iphone12.png"
+          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)"
         />
         <link
           rel="apple-touch-startup-image"
@@ -24,23 +32,13 @@ export default function Document() {
         />
         <link
           rel="apple-touch-startup-image"
-          href="/splash/splash-iphone12.png"
-          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)"
-        />
-        <link
-          rel="apple-touch-startup-image"
-          href="/splash/splash-iphone14promax.png"
-          media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)"
+          href="/splash/splash-iphoneSE.png"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
         />
         <link
           rel="apple-touch-startup-image"
           href="/splash/splash-ipad.png"
           media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-        />
-        <link
-          rel="apple-touch-startup-image"
-          href="/splash/splash-iphone15-optimized.png"
-          media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
         />
       </Head>
       <body>
