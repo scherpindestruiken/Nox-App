@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body {
   @apply m-0 p-0 font-sans;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-
+  background-color: black; /* 🔥 zorgt voor zwarte rand op iOS */
+  color: white;
 }
 
 @media (max-width: 768px) {
