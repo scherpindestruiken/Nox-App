@@ -9,13 +9,10 @@ export default function Document() {
         <meta name="theme-color" content="#0e1f18" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/manifest.json" />
+
+        {/* App iconen */}
         <link rel="apple-touch-icon" sizes="192x192" href="/icon-192-v2.png" />
         <link rel="apple-touch-icon" sizes="512x512" href="/icon-512-v2.png" />
-        <link
-        rel="apple-touch-startup-image"
-        href="/splash/splash-iphone15-v2.jpeg"
-        media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
-/>
 
         {/* Splashscreen iPhone 15 */}
         <link
@@ -24,7 +21,7 @@ export default function Document() {
           media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
         />
 
-        {/* Andere iPhones (optioneel) */}
+        {/* Andere iPhones */}
         <link
           rel="apple-touch-startup-image"
           href="/splash/splash-iphone12.png"
@@ -40,6 +37,8 @@ export default function Document() {
           href="/splash/splash-iphoneSE.png"
           media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
         />
+
+        {/* iPad 9.7" */}
         <link
           rel="apple-touch-startup-image"
           href="/splash/splash-ipad.png"
