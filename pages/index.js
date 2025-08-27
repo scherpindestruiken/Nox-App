@@ -1,33 +1,39 @@
 export default function Home() {
   return (
-    <main style={styles.main}>
-      <h1 style={styles.title}>Welkom bij Nox 🦝</h1>
-      <p style={styles.subtitle}>
-        Scherp in de Struiken – een ondeugende blik op de natuur.
-      </p>
+    <main style={styles.container}>
+      <div style={styles.background}></div>
+      <h1 style={styles.text}>Welkom bij Nox</h1>
     </main>
   );
 }
 
 const styles = {
-  main: {
-    backgroundColor: '#000000',
+  container: {
+    position: 'relative',
+    width: '100vw',
+    height: '100vh',
+    overflow: 'hidden',
+    margin: 0,
+    padding: 0,
+  },
+  background: {
+    backgroundImage: 'url("/splash/splash-iphone15-optimized.png")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+  },
+  text: {
+    position: 'relative',
+    zIndex: 1,
     color: 'white',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    fontSize: '2rem',
     textAlign: 'center',
-    padding: '2rem',
-  },
-  title: {
-    fontSize: '2.5rem',
-    marginBottom: '1rem',
-  },
-  subtitle: {
-    fontSize: '1.2rem',
-    maxWidth: '600px',
-    lineHeight: '1.6',
+    top: '60%',
   },
 };
