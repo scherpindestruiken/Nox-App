@@ -14,10 +14,10 @@ export default function Document() {
         <link rel="apple-touch-icon" sizes="192x192" href="/icon-192-v2.png" />
         <link rel="apple-touch-icon" sizes="512x512" href="/icon-512-v2.png" />
 
-        {/* Splashscreen iPhone 15 */}
+        {/* 🔥 Splashscreen iPhone 15 (PNG) */}
         <link
           rel="apple-touch-startup-image"
-          href="/splash/splash-iphone15-v2.jpeg"
+          href="/splash/splash-iphone15-v3.png"
           media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
         />
 
