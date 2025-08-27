@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [splashImage, setSplashImage] = useState('/splash/splash-iphone15-optimized.png');
 
   useEffect(() => {
-    // Detecteer breedte
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize(); // bij init
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (width >= 3440) {
+      setSplashImage('/splash/splash-desktop-3440x1440.png');
+    } else if (width >= 2560) {
+      setSplashImage('/splash/splash-desktop-2560x1080.png');
+    } else if (width >= 1024) {
+      setSplashImage('/splash/splash-desktop-1920x1080.png');
+    } else {
+      setSplashImage('/splash/splash-iphone15-optimized.png');
+    }
   }, []);
 
   return (
@@ -16,7 +23,7 @@ export default function Home() {
       <div
         style={{
           ...styles.background,
-          backgroundSize: isMobile ? 'cover' : 'contain',
+          backgroundImage: `url("${splashImage}")`,
         }}
       />
     </main>
@@ -31,14 +38,11 @@ const styles = {
     padding: 0,
     overflow: 'hidden',
     backgroundColor: 'black',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   background: {
-    backgroundImage: 'url("/splash/splash-iphone15-optimized.png")',
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
     backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
     width: '100%',
     height: '100%',
   },
