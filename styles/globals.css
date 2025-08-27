@@ -2,17 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Zorg dat html/body altijd 100% vullen en zwart zijn */
 html, body {
   @apply m-0 p-0 font-sans;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: black; /* 🔥 zorgt voor zwarte rand op iOS */
+  background-color: black;
   color: white;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (max-width: 768px) {
-  .fullscreen-bg {
-    background-image: url('/images/NOX_home.png');
-  }
+/* Zorg dat alle elementen correct box-sizing gebruiken */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Zorg dat het hoofdvlak van de app ook 100% vult */
+main {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }
