@@ -2,7 +2,6 @@ export default function Home() {
   return (
     <main style={styles.container}>
       <div style={styles.background}></div>
-      <h1 style={styles.text}>Welkom bij Nox</h1>
     </main>
   );
 }
