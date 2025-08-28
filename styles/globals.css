@@ -230,3 +230,87 @@ h1,h2,h3,h4{
   color: var(--heading-ink);
   text-shadow: 0 1px 1px rgba(0,0,0,.28);
 }
+
+/* ===== NOX navbar (donkergroen + NOX-goud) ===== */
+:root {
+  --nox-green: #0b2d26;   /* bos-donkergroen */
+  --nox-green-80: #0b2d26cc;
+  --nox-gold:  #d0c38d;   /* tekstkleur zoals splash-titel */
+  --nox-gold-2:#e7dba7;
+  --nox-border:#1a3a33;
+}
+
+.nox-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nox-green-80);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--nox-border);
+}
+
+.nox-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nox-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nox-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(208, 195, 141, 0.15);
+}
+
+.nox-title {
+  color: var(--nox-gold);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.nox-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nox-links a {
+  color: var(--nox-gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nox-links a:hover {
+  color: var(--nox-gold-2);
+  text-shadow: 0 0 8px rgba(231, 219, 167, 0.35);
+}
+
+/* Paginawrap houdt je bestaande groene achtergrond in beeld */
+.nox-page {
+  min-height: calc(100vh - 64px);
+}
+
+/* Build-label onderin */
+.nox-build {
+  color: rgba(231, 219, 167, 0.75);
+  font-size: 12px;
+  text-align: center;
+  padding: 12px 0 18px;
+}
+@media (max-width: 640px) {
+  .nox-logo { width: 30px; height: 30px; }
+  .nox-title { font-size: 0.95rem; }
+  .nox-links { gap: 12px; font-size: 0.95rem; }
+}
