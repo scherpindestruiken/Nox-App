@@ -45,3 +45,5 @@ public/precache-manifest.*.js
 
 # Voorbeeldbestand wél committen
 !.env.example
+# Ignore lokale helper scripts
+*.sh
