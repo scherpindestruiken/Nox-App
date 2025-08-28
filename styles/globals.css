@@ -1,346 +1,88 @@
-/* Basis */
-* { box-sizing: border-box; }
-html, body, #__next { height: 100%; }
-body {
+/* =========================================================
+   GLOBALS.CSS – minimal splash setup
+   - Mobiel (default): /splash/splash-iphone15-v2.png
+   - Desktop:          /splash/splash-desktop-1920x1080.png
+   - Pakt 100dvh op mobiel, met safe-area.
+   - Maakt alle oude hero/splash backgrounds onschadelijk.
+   ========================================================= */
+
+/* ------------ Basis reset die we echt nodig hebben ------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body, #__next {
+  height: 100%;
   margin: 0;
-  background: #0b0c0f;
-  color: #e8e8ea;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  padding: 0;
 }
 
-/* Header */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(13,16,22,0.6);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.header-inner {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 16px;
-}
-.brand-link {
-  text-decoration: none;
-  color: #fff;
-}
-.brand-title {
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-.top-nav { display: flex; gap: 10px; }
-.top-link {
-  text-decoration: none;
-  color: #d8d8dc;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-}
-.top-link:hover { border-color: rgba(255,255,255,0.12); color: #fff; }
+:root {
+  /* Pas aan als je header hoger is dan ~56px */
+  --header-height: 56px;
 
-/* Home */
-.home {
-  min-height: calc(100vh - 56px);
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
-.hero {
-  text-align: center;
-  max-width: 720px;
-  padding: 28px 24px 32px;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
-  background:
-    radial-gradient(800px 400px at 20% -10%, rgba(0, 153, 255, 0.10), transparent 60%),
-    radial-gradient(600px 300px at 110% 90%, rgba(180, 0, 255, 0.08), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
-.hero-title { font-size: 28px; margin: 0 0 10px; }
-.hero-sub { opacity: 0.85; margin: 0 0 22px; }
-
-/* CTA */
-.cta {
-  display: inline-block;
-  text-decoration: none;
-  color: #0b0c0f;
-  background: #b7ff64;
-  border: 1px solid #9de24f;
-  font-weight: 700;
-  padding: 12px 18px;
-  border-radius: 14px;
-  transition: transform 120ms ease, box-shadow 120ms ease;
-  box-shadow: 0 8px 20px rgba(183,255,100,0.25);
-}
-.cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(183,255,100,0.35);
-}
-.hint { opacity: 0.65; font-size: 14px; margin-top: 10px; }
-
-/* Page */
-.page { padding: 24px; max-width: 1000px; margin: 0 auto; }
-.page-title { margin: 6px 0 6px; font-size: 26px; }
-.page-sub { opacity: 0.8; margin: 0 0 16px; }
-
-/* Menu grid */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 14px;
-}
-@media (min-width: 720px) {
-  .menu-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
-}
-.menu-card {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
-  padding: 18px 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
-  min-height: 120px;
-}
-.menu-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.22);
-  background: rgba(255,255,255,0.08);
-}
-.menu-emoji { font-size: 28px; margin-bottom: 10px; }
-.menu-title { font-weight: 700; margin-bottom: 4px; }
-.menu-sub { opacity: 0.8; font-size: 14px; }
-
-/* Safe areas (iOS) */
-@supports (padding: max(0px)) {
-  .header-inner { padding-top: max(0px, env(safe-area-inset-top)); }
-}
-/* ====== HERO v2 (optie 1) ====== */
-.home {
-  min-height: calc(100vh - 56px);
-  display: grid;
-  place-items: center;
-  padding: 24px;
+  /* Zwarte letterboxing als aspect ratio niet matcht */
+  --page-bg: #000;
 }
 
-.hero--mag {
-  position: relative;
-  width: 100%;
-  min-height: min(74vh, 780px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
-  overflow: hidden;
-  background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(0, 153, 255, 0.10), transparent 60%),
-    radial-gradient(900px 500px at 110% 90%, rgba(180, 0, 255, 0.08), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)),
-    url("/NOX_homescreen.jpeg");
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
-
-.hero--mag::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.38), rgba(0,0,0,0.55));
-  pointer-events: none;
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 920px;
-  margin: 0 auto;
-  padding: clamp(24px, 6vw, 56px);
-  text-align: center;
-}
-
-.hero-title {
-  font-size: clamp(28px, 4.6vw, 54px);
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  margin: 0 0 6px;
-  color: #fff;
-  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
-}
-
-.hero-tagline {
-  margin: 0 0 22px;
-  opacity: 0.92;
-  font-size: clamp(16px, 2.2vw, 20px);
-}
-
-.hero-actions {
-  display: inline-flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 6px;
-}
-
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  padding: 11px 16px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  font-weight: 700;
-  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
-  will-change: transform;
-}
-
-.btn-primary {
-  color: #0b0c0f;
-  background: #b7ff64;
-  border-color: #9de24f;
-  box-shadow: 0 8px 20px rgba(183,255,100,0.25);
-}
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(183,255,100,0.35);
-}
-
-.btn-ghost {
-  color: #e8e8ea;
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.16);
-}
-.btn-ghost:hover {
-  border-color: rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.10);
-}
-
-.hero-secondary { margin-top: 12px; opacity: 0.8; }
-.text-link {
-  color: #d6ffd0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.text-link:hover { color: #ffffff; }
-/* ====== /HERO v2 ====== */
-
-
-/* ====== Minimal Splash Start (fullscreen beeld, geen knoppen/titel) ====== */
-.home {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr; /* header/nav boven, splash vult rest */
-}
-.splash {
-  min-height: calc(100vh - 56px); /* corrigeer als jouw header hoger/lager is */
-  background: url("/splash/splash-iphone15-v2.png") center center / cover no-repeat;
-}
-/* ====== /Minimal Splash Start ====== */
-
-/* === Splash override (20250828_121900) === */
-:root { --header-height: 56px; } /* pas aan als je header hoger is */
-.home { min-height: 100vh; display: grid; grid-template-rows: auto 1fr; }
-.splash {
-  min-height: calc(100vh - var(--header-height));
-  background-image: url("/splash/splash-iphone15-v2.png") !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-}
-/* === /Splash override === */
-
-/* === Splash override (20250828_131621) === */
-:root { --header-height: 56px; }
-.home { min-height: 100vh; display: grid; grid-template-rows: auto 1fr; }
-.splash {
-  min-height: calc(100vh - var(--header-height));
-  background-image: url("/splash/splash-iphone15-v2.jpeg") !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-}
-/* === /Splash override === */
-
-/* ==== Splash contain fix (no crop) ==== */
-:root { --header-height: 56px; } /* pas aan als je header hoger is */
-
-html, body, #__next { height: 100%; margin: 0; padding: 0; }
-
-/* Oude backgrounds uitzetten zodat niets eroverheen tekent */
-html, body, #__next, main, .home, .splash, .hero, .hero--mag {
-  background: transparent !important;
+/* ------------ Alle oude backgrounds/hacks uitzetten ------------ */
+.hero, .hero--mag, .splash, .splash-img {
+  background: none !important;
   background-image: none !important;
+  box-shadow: none !important;
 }
 .hero--mag::after { background: none !important; }
+.splash-img { display: none !important; } /* als er ooit nog zo’n img staat */
 
-/* Container voor de splash */
+/* ------------ Pagina-container ------------ */
 .home {
-  min-height: 100vh;
-  padding-top: var(--header-height);
-  display: grid;
-  place-items: center;
-  background-color: #000; /* letterboxing */
+  /* Houdt rekening met je top-navigatie */
+  min-height: calc(100vh - var(--header-height));
 }
 
-/* Afbeelding netjes passend, nooit croppen */
-.splash-img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100vw;
-  max-height: calc(100vh - var(--header-height));
-  object-fit: contain;
-  object-position: center;
-  image-rendering: auto;
+/* iOS/Android “100vh”-ellende omzeilen met 100dvh waar mogelijk */
+@supports (height: 100dvh) {
+  .home {
+    min-height: calc(100dvh - var(--header-height));
+  }
 }
-/* ==== /Splash contain fix ==== */
 
-/* ==== SPLASH OVERRIDE 20250828_133501 (auto-ext) ==== */
-html, body, #__next { height: 100%; margin: 0; padding: 0; }
-
-.hero, .hero--mag, .splash { background: none !important; }
-.hero--mag::after { background: none !important; }
-.splash-img { display: none !important; }
-
-.home { min-height: 100dvh; }
-
+/* ------------ Achtergrond op BODY (en niet op .home) ------------ */
+/* Default = MOBIEL (portret). We tonen de portret-splash beeldvullend. */
 body {
-  background-color: #000 !important;
-  background-image: url("/splash/splash-desktop-1920x1080.png?v=1756380901") !important;
-  background-position: center center !important;
+  background-color: var(--page-bg) !important;
+  background-image: url("/splash/splash-iphone15-v2.png") !important;
   background-repeat: no-repeat !important;
+  background-position: center center !important;
   background-size: cover !important;
 }
 
-@media (max-width: 768px) {
-  body {
-    background-image: url("/splash/splash-iphone15-v2.png?v=1756380901") !important;
-  }
-}
-/* ==== /SPLASH OVERRIDE ==== */
-
-/* === MOBILE SPLASH TUNING 20250828_134239 === */
-/* Basis (desktop blijft cover): niets wijzigen hier,
-   we overschrijven alleen voor small screens / portrait. */
-
-@media (max-width: 768px), (orientation: portrait) {
-  html, body, #__next { height: 100%; margin: 0; padding: 0; }
-  body {
-    background-color: #000 !important;
-    background-image: url("/splash/splash-iphone15-v2.png?v=1756381359") !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: contain !important;   /* laat hele afbeelding zien */
-  }
-}
-
-/* Super smalle schermen: iets hoger positioneren als het gezicht te laag valt */
+/* iOS notch/safe-area: positioneer een tikje hoger als nodig */
 @media (max-width: 420px) and (orientation: portrait) {
-  body { background-position: center 45% !important; }
+  body { background-position: center 48% !important; }
 }
-/* === /MOBILE SPLASH TUNING === */
+
+/* ------------ DESKTOP / BREED SCHERM ------------ */
+/* Zodra het scherm breder is (meer landscape dan portrait), switchen we. */
+@media (min-aspect-ratio: 4/3) {
+  body {
+    background-image: url("/splash/splash-desktop-1920x1080.png") !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+}
+
+/* Extra: superbrede monitors (ultrawide) – iets hoger kaderen */
+@media (min-aspect-ratio: 21/9) {
+  body { background-position: center 52% !important; }
+}
+
+/* ------------ Typografie/links (optioneel, basic) ------------ */
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: #eaeaea;
+}
+
+/* Links in navbar of elders – neutraal */
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
