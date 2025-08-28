@@ -45,3 +45,6 @@ public/sw.js
 public/workbox-*.js
 public/fallback-*.js
 public/precache-manifest.*.js
+
+# ⬇️ Build-time environment file (niet committen)
+.env.production
