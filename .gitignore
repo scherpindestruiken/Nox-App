@@ -75,3 +75,17 @@ quick-pwa-repair.sh
 *.bak
 *.report.html
 update-to-puzzelpagina.sh
+# --- Project-specifiek ---
+# Negeer backupbestanden
+*.bak*
+*.bak.*
+# Negeer tijdelijke helper scripts
+clean-helper-scripts.sh
+make-minimal-splash.sh
+tune-mobile-splash.sh
+set-splash-clean.sh
+# Laat deze scripts wel toe in git (niet negeren)
+!update-splash.sh
+!update-splash-auto.sh
+!set-splash.sh
+!set-start-splash.sh
