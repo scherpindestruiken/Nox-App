@@ -503,3 +503,45 @@ html, body { height: 100%; }
       var(--nox-green);
   }
 }
+
+/* ===== iOS fix: home achtergrond op body in plaats van alleen op main ===== */
+:root {
+  --nox-green: #0b2d26;
+}
+
+/* Zorg dat we volledige viewporthoogte benutten, ook op iOS met dynamische balken */
+html, body { min-height: 100%; }
+.nox-page { min-height: calc(100svh - 64px); }
+
+/* Subpagina's blijven donkergroen */
+.page-default {
+  background: var(--nox-green);
+}
+
+/* Home op MOBIEL: geen 'fixed', iOS lust dat niet. */
+/* We zetten de achtergrond op body.home-body, zodat iOS standalone 'm toont. */
+body.home-body {
+  background:
+    url("/splash/splash-iphone15-v3.png") center center / cover no-repeat,
+    var(--nox-green);
+  /* WebKit hints (zijn meestal niet nodig, maar kan helpen) */
+  -webkit-background-size: cover;
+  background-attachment: scroll;
+}
+
+/* Desktop: brede achtergrond + mag 'fixed' */
+@media (min-width: 900px) {
+  body.home-body {
+    background:
+      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
+      var(--nox-green);
+  }
+}
+
+/* Zorg dat content geen achtergrond over de foto legt op home */
+.page-home .nox-section,
+.page-home .nox-card,
+.page-home .content,
+.page-home article {
+  background: transparent;
+}
