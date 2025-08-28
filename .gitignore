@@ -74,3 +74,4 @@ quick-pwa-repair.sh
 # Backups en rapporten
 *.bak
 *.report.html
+update-to-puzzelpagina.sh
