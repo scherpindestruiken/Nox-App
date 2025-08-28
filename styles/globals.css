@@ -323,3 +323,24 @@ body {
   }
 }
 /* ==== /SPLASH OVERRIDE ==== */
+
+/* === MOBILE SPLASH TUNING 20250828_134239 === */
+/* Basis (desktop blijft cover): niets wijzigen hier,
+   we overschrijven alleen voor small screens / portrait. */
+
+@media (max-width: 768px), (orientation: portrait) {
+  html, body, #__next { height: 100%; margin: 0; padding: 0; }
+  body {
+    background-color: #000 !important;
+    background-image: url("/splash/splash-iphone15-v2.png?v=1756381359") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: contain !important;   /* laat hele afbeelding zien */
+  }
+}
+
+/* Super smalle schermen: iets hoger positioneren als het gezicht te laag valt */
+@media (max-width: 420px) and (orientation: portrait) {
+  body { background-position: center 45% !important; }
+}
+/* === /MOBILE SPLASH TUNING === */
