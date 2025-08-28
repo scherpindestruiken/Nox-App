@@ -427,3 +427,45 @@ h1,h2,h3,h4{
   color: rgba(231,219,167,.75);
   font-size: 12px; text-align: center; padding: 12px 0 18px;
 }
+
+/* ========= Achtergronden per pagina-type ========= */
+:root {
+  --nox-green: #0b2d26;
+}
+
+/* Default voor ALLES behalve home: donkergroen */
+.page-default {
+  min-height: calc(100vh - 64px);
+  background: var(--nox-green);
+  background-attachment: fixed;
+}
+
+/* Home: wasbeer-splash (mobiel) */
+.page-home {
+  min-height: calc(100vh - 64px);
+  background:
+    url("/splash/splash-iphone15-v2.png") center center / cover no-repeat fixed,
+    var(--nox-green);
+}
+
+/* Home: desktop krijgt de brede desktop-afbeelding */
+@media (min-width: 900px) {
+  .page-home {
+    background:
+      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
+      var(--nox-green);
+  }
+}
+
+/* Zorg dat content leesbaar is op de home-splash */
+.page-home .nox-section,
+.page-home .nox-card,
+.page-home .content,
+.page-home article {
+  background: rgba(0,0,0,0.0); /* transparant; zet hier evt. een lichte overlay als je tekst wegvalt */
+}
+
+/* Extra veiligheid: body niet overrulen door oudere regels */
+body {
+  background: var(--nox-green);
+}

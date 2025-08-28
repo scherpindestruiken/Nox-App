@@ -1,8 +1,12 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import NavBar from "@/components/NavBar";
+import { useRouter } from "next/router";
 
 export default function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const isHome = router.pathname === "/";
+
   return (
     <>
       <Head>
@@ -16,10 +20,14 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.png?v=2" />
         <link rel="apple-touch-icon" href="/icon-192.png?v=2" />
       </Head>
+
       <NavBar />
-      <main className="nox-page">
+
+      {/* Home krijgt wasbeer-splash, andere pagina's donkergroen */}
+      <main className={`nox-page ${isHome ? "page-home" : "page-default"}`}>
         <Component {...pageProps} />
       </main>
+
       <footer className="nox-build">
         Build: {process.env.NEXT_PUBLIC_BUILD_TIME || "dev"}
       </footer>
