@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "echo \"NEXT_PUBLIC_BUILD_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)\" > .env.production",
+    "prebuild": "TZ=Europe/Amsterdam date '+NEXT_PUBLIC_BUILD_TIME=%d-%m-%Y %H:%M' > .env.production",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
