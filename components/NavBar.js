@@ -1,107 +1,67 @@
-// components/NavBar.js
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/fotopagina", label: "Fotopagina" },
-  { href: "/puzzelpagina", label: "Puzzelpagina" },
-  { href: "/wedstrijd", label: "Wedstrijd" },
-];
-
-export default function NavBar() {
-  const { pathname } = useRouter();
+export default function NavBar(){
   const [open, setOpen] = useState(false);
-  const panelRef = useRef(null);
-  const btnRef = useRef(null);
+  const router = useRouter();
 
+  // Sluit menu bij routewissel
   useEffect(() => {
-    function onDocClick(e) {
-      if (!open) return;
-      const panel = panelRef.current;
-      const btn = btnRef.current;
-      if (panel && !panel.contains(e.target) && btn && !btn.contains(e.target)) {
-        setOpen(false);
-      }
-    }
-    function onEsc(e) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    document.addEventListener("click", onDocClick);
-    document.addEventListener("keydown", onEsc);
-    return () => {
-      document.removeEventListener("click", onDocClick);
-      document.removeEventListener("keydown", onEsc);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const firstLink = panelRef.current?.querySelector("a");
-    firstLink?.focus();
-  }, [open]);
+    setOpen(false);
+  }, [router.pathname]);
 
   return (
-    <header className="nav-root" role="banner">
-      <div className="nav-bg" aria-hidden="true" />
-      <div className="nav-inner">
-        <div className="nav-left">
-          <Link href="/" className="brand" aria-label="Terug naar start">
-            <span className="brand-logo-wrap">
-              <img src="/NOX_favicon.jpeg" alt="" className="brand-icon" />
-            </span>
-            <span className="brand-name">Scherp in de Struiken</span>
-          </Link>
-        </div>
+    <header className="nox-nav" role="banner">
+      <div className="nox-nav-inner">
+        <Link href="/" className="nox-brand" aria-label="Home">
+          <img
+            src="/icon-192.png"
+            alt="NOX logo"
+            width="36"
+            height="36"
+            className="nox-logo"
+            loading="eager"
+            decoding="async"
+          />
+          <span className="nox-title">Scherp in de Struiken</span>
+        </Link>
 
-        <nav className="nav-links" aria-label="Hoofdmenu">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`nav-link ${pathname === l.href ? "active" : ""}`}
-            >
-              <span className="nav-link-label">{l.label}</span>
-            </Link>
-          ))}
+        {/* Desktop links */}
+        <nav className="nox-links" aria-label="Hoofdmenu">
+          <Link href="/start" className={router.pathname==="/start" ? "active" : ""}>Start</Link>
+          <Link href="/blog" className={router.pathname==="/blog" ? "active" : ""}>Blog</Link>
+          <Link href="/fotopagina" className={router.pathname==="/fotopagina" ? "active" : ""}>Foto</Link>
+          <Link href="/puzzelpagina" className={router.pathname==="/puzzelpagina" ? "active" : ""}>Puzzel</Link>
+          <Link href="/wedstrijd" className={router.pathname==="/wedstrijd" ? "active" : ""}>Wedstrijd</Link>
         </nav>
 
-        <div className="nav-mobile">
-          <button
-            ref={btnRef}
-            className="hamburger"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Sluit menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-            </svg>
-          </button>
-
-          <div
-            ref={panelRef}
-            id="mobile-menu"
-            className={`mobile-panel ${open ? "open" : ""}`}
-            role="menu"
-          >
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`mobile-link ${pathname === l.href ? "active" : ""}`}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </div>
+        {/* Hamburger knop (alleen mobiel zichtbaar via CSS) */}
+        <button
+          className="nox-burger"
+          aria-label="Open navigatie"
+          aria-controls="mobile-menu"
+          aria-expanded={open ? "true" : "false"}
+          onClick={() => setOpen(v => !v)}
+        >
+          <span className="nox-burger-bar" />
+          <span className="nox-burger-bar" />
+          <span className="nox-burger-bar" />
+        </button>
       </div>
+
+      {/* Mobiele overlay */}
+      <nav
+        id="mobile-menu"
+        className={`nox-mobile ${open ? "open" : ""}`}
+        aria-label="Mobiele navigatie"
+      >
+        <Link href="/start" className={router.pathname==="/start" ? "active" : ""}>Start</Link>
+        <Link href="/blog" className={router.pathname==="/blog" ? "active" : ""}>Blog</Link>
+        <Link href="/fotopagina" className={router.pathname==="/fotopagina" ? "active" : ""}>Foto</Link>
+        <Link href="/puzzelpagina" className={router.pathname==="/puzzelpagina" ? "active" : ""}>Puzzel</Link>
+        <Link href="/wedstrijd" className={router.pathname==="/wedstrijd" ? "active" : ""}>Wedstrijd</Link>
+      </nav>
     </header>
   );
 }

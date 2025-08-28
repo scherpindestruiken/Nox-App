@@ -314,3 +314,116 @@ h1,h2,h3,h4{
   .nox-title { font-size: 0.95rem; }
   .nox-links { gap: 12px; font-size: 0.95rem; }
 }
+
+/* ===== NOX NAV met hamburger ===== */
+:root{
+  --nox-green: #0b2d26;
+  --nox-green-80: #0b2d26cc;
+  --nox-border:#1a3a33;
+  --nox-ink: #8C8952;      /* splash-inkt */
+  --nox-ink-2:#e7dba7;
+}
+
+.nox-nav{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nox-green-80);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--nox-border);
+}
+
+.nox-nav-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nox-brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nox-logo{
+  width: 36px; height: 36px; border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(208,195,141,.15);
+}
+
+.nox-title{
+  color: var(--nox-ink);
+  font-weight: 700;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+
+/* Desktop menu */
+.nox-links{
+  display: none;
+  gap: 16px;
+}
+.nox-links a{
+  color: var(--nox-ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.nox-links a:hover{ color: var(--nox-ink-2); text-shadow: 0 0 8px rgba(231,219,167,.35); }
+.nox-links a.active{
+  border-bottom: 2px solid var(--nox-ink);
+  padding-bottom: 2px;
+}
+
+/* Hamburger knop (mobile) */
+.nox-burger{
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 40px; height: 36px;
+  align-items: center; justify-content: center;
+  background: transparent; border: 0; cursor: pointer;
+}
+.nox-burger-bar{
+  width: 22px; height: 2px; background: var(--nox-ink);
+  display: block;
+}
+
+/* Mobiele menu overlay */
+.nox-mobile{
+  display: none;
+  position: fixed; inset: 56px 0 0 0;
+  background: rgba(11,45,38,0.95);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+  border-top: 1px solid var(--nox-border);
+}
+.nox-mobile a{
+  display: block;
+  color: var(--nox-ink);
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 12px 4px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nox-mobile a:last-child{ border-bottom: 0; }
+.nox-mobile a.active{ color: var(--nox-ink-2); }
+
+.nox-mobile.open{ display: block; }
+
+/* Desktop breakpoint */
+@media (min-width: 900px){
+  .nox-burger{ display: none; }
+  .nox-links{ display: inline-flex; }
+  .nox-mobile{ display: none !important; }
+}
+
+/* Page + footer */
+.nox-page{ min-height: calc(100vh - 64px); }
+.nox-build{
+  color: rgba(231,219,167,.75);
+  font-size: 12px; text-align: center; padding: 12px 0 18px;
+}
