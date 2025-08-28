@@ -1,29 +1,53 @@
 /* styles/globals.css */
 
-/* Basis resets */
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #__next { height: 100%; margin: 0; padding: 0; }
-:root { --header-height: 56px; }
-
-/* Containerhoogte, met 100dvh waar ondersteund (iOS) */
-.home { min-height: calc(100vh - var(--header-height)); }
-@supports (height: 100dvh) {
-  .home { min-height: calc(100dvh - var(--header-height)); }
-}
-
-/* Oude rommel uitschakelen, voor de zekerheid */
-.hero, .hero--mag, .splash, .splash-img {
-  background: none !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-.hero--mag::after { background: none !important; }
-.splash-img { display: none !important; }
-
-/* Tekst (neutraal, optioneel) */
 body {
   color: #eaeaea;
+  background: #000; /* fallback als image niet laadt */
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* Hoogte correct op iOS (100dvh waar beschikbaar) */
+:root { --header-height: 0px; }
+main { min-height: calc(100vh - var(--header-height)); }
+@supports (height: 100dvh) {
+  main { min-height: calc(100dvh - var(--header-height)); }
+}
+
+/* ====== SPLASH ACHTERGROND ====== */
+/* Standaard: mobiel/portret */
+body {
+  background-image: url("/splash/splash-iphone15-v3.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;     /* beeldvullend */
+  /* Geen background-attachment: fixed; iOS doet daar toch raar mee */
+}
+
+/* Desktop/breedbeeld */
+@media (min-aspect-ratio: 4/3), (min-width: 1024px) {
+  body {
+    background-image: url("/splash/splash-desktop-1920x1080.png");
+  }
+}
+
+/* ====== OUDE REGELS UITSCHAKELEN ======
+   Alles wat eerder je splash verstopte, neutraliseren zonder slopen.
+*/
+.splash, .splash-img, .hero, .hero--mag {
+  /* had je hier ooit display:none !important; etc., dat halen we weg */
+  background: none;             /* laat body de achtergrond verzorgen */
+  background-image: none;
+  box-shadow: none;
+}
+
+/* Als er nog componenten waren die een extra overlay toevoegden */
+.hero--mag::after {
+  content: none !important;
+}
+
+/* Links */
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }

@@ -6,18 +6,30 @@ export default class MyDocument extends Document {
     return (
       <Html lang="nl">
         <Head>
-          {/* iOS fullscreen en veilige randen */}
-          <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, viewport-fit=cover" />
+          {/* iOS/Android fullscreen en juiste insets */}
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, height=device-height, viewport-fit=cover"
+          />
           <meta name="theme-color" content="#000000" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-          {/* Preload splash images zodat ze meteen beschikbaar zijn */}
-          <link rel="preload" as="image" href="/splash/splash-iphone15-v3.jpeg" />
+          {/* PRELOAD de juiste assets (PNG/PNG). Geen .jpeg hier. */}
+          <link rel="preload" as="image" href="/splash/splash-iphone15-v3.png" />
           <link rel="preload" as="image" href="/splash/splash-desktop-1920x1080.png" />
 
-          {/* Apple touch icon (mag je eigen icoon zijn) */}
-          <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+          {/* Optioneel: iOS startup images */}
+          <link
+            rel="apple-touch-startup-image"
+            href="/splash/splash-iphone15-v3.png"
+            media="(max-width: 768px)"
+          />
+          <link
+            rel="apple-touch-startup-image"
+            href="/splash/splash-desktop-1920x1080.png"
+            media="(min-width: 769px)"
+          />
         </Head>
         <body>
           <Main />
