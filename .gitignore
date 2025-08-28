@@ -90,3 +90,20 @@ set-splash-clean.sh
 !set-splash.sh
 !set-start-splash.sh
 save-clean.sh
+
+# Helper & tijdelijke scripts
+*.sh
+!set-splash-mobile-desktop.sh   # uitzondering: dit script wél tracken
+
+# Backup bestanden
+*.bak
+*.bak.*
+
+# Logs
+*.log
+
+# Rapporten & tijdelijke html
+*.report.html
+
+# macOS
+.DS_Store
