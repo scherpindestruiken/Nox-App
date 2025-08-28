@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "(TZ=Europe/Amsterdam date '+NEXT_PUBLIC_BUILD_TIME=%d-%m-%Y %H:%M' || date '+NEXT_PUBLIC_BUILD_TIME=%d-%m-%Y %H:%M') > .env.production",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prebuild && next build",
     "start": "next start",
     "lint": "eslint"
   },
