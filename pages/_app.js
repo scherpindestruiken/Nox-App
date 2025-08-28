@@ -11,8 +11,6 @@ export default function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#0f2f24" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/NOX_favicon.jpeg" />
-        <link rel="preload" as="image" href="/splash/splash-iphone15-v3.png" />
-        <link rel="preload" as="image" href="/splash/splash-desktop-1920x1080.png" />
       </Head>
       <NavBar />
       <Component {...pageProps} />

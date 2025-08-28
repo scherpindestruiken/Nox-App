@@ -31,7 +31,6 @@ body{
   font-size:var(--fs-base);
   color:var(--text);
   background:var(--bg);
-  background-image:url("/splash/splash-iphone15-v3.png");
   background-position:center center;
   background-repeat:no-repeat;
   background-size:cover;
@@ -160,4 +159,31 @@ a{text-decoration:none;color:inherit}
   font-weight: 600;
   letter-spacing: .2px;
   text-shadow: 0 1px 1px rgba(0,0,0,.35);
+}
+
+/* ============== NOX Forest Page BG ==============
+   Bos-achtergrond voor alle pagina’s (zonder splash/wasbeer).
+   Laagjes: diepgroen vlak + twee zachte radials (mist/licht).
+   ================================================= */
+body{
+  /* basis */
+  background: #0b241c; /* fallback */
+  /* gelaagd bosgevoel */
+  background:
+    radial-gradient(130% 80% at 15% 10%, rgba(53,89,73,0.20) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(110% 70% at 85% 90%, rgba(35,70,55,0.18) 0%, rgba(0,0,0,0) 65%),
+    linear-gradient(180deg, #0f2f24 0%, #0b241c 60%, #0a2019 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* iets meer diepte op grote schermen */
+@media (min-width: 1024px){
+  body{
+    background:
+      radial-gradient(120% 90% at 12% 0%, rgba(60,96,80,0.18) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(120% 100% at 90% 110%, rgba(40,80,65,0.16) 0%, rgba(0,0,0,0) 70%),
+      linear-gradient(180deg, #0f2f24 0%, #0b241c 55%, #0a2019 100%);
+  }
 }
