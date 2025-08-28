@@ -1,88 +1,29 @@
-/* =========================================================
-   GLOBALS.CSS – minimal splash setup
-   - Mobiel (default): /splash/splash-iphone15-v2.png
-   - Desktop:          /splash/splash-desktop-1920x1080.png
-   - Pakt 100dvh op mobiel, met safe-area.
-   - Maakt alle oude hero/splash backgrounds onschadelijk.
-   ========================================================= */
+/* styles/globals.css */
 
-/* ------------ Basis reset die we echt nodig hebben ------------ */
-*,
-*::before,
-*::after { box-sizing: border-box; }
+/* Basis resets */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #__next { height: 100%; margin: 0; padding: 0; }
+:root { --header-height: 56px; }
 
-html, body, #__next {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* Containerhoogte, met 100dvh waar ondersteund (iOS) */
+.home { min-height: calc(100vh - var(--header-height)); }
+@supports (height: 100dvh) {
+  .home { min-height: calc(100dvh - var(--header-height)); }
 }
 
-:root {
-  /* Pas aan als je header hoger is dan ~56px */
-  --header-height: 56px;
-
-  /* Zwarte letterboxing als aspect ratio niet matcht */
-  --page-bg: #000;
-}
-
-/* ------------ Alle oude backgrounds/hacks uitzetten ------------ */
+/* Oude rommel uitschakelen, voor de zekerheid */
 .hero, .hero--mag, .splash, .splash-img {
   background: none !important;
   background-image: none !important;
   box-shadow: none !important;
 }
 .hero--mag::after { background: none !important; }
-.splash-img { display: none !important; } /* als er ooit nog zo’n img staat */
+.splash-img { display: none !important; }
 
-/* ------------ Pagina-container ------------ */
-.home {
-  /* Houdt rekening met je top-navigatie */
-  min-height: calc(100vh - var(--header-height));
-}
-
-/* iOS/Android “100vh”-ellende omzeilen met 100dvh waar mogelijk */
-@supports (height: 100dvh) {
-  .home {
-    min-height: calc(100dvh - var(--header-height));
-  }
-}
-
-/* ------------ Achtergrond op BODY (en niet op .home) ------------ */
-/* Default = MOBIEL (portret). We tonen de portret-splash beeldvullend. */
+/* Tekst (neutraal, optioneel) */
 body {
-  background-color: var(--page-bg) !important;
-  background-image: url("/splash/splash-iphone15-v2.png") !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: cover !important;
-}
-
-/* iOS notch/safe-area: positioneer een tikje hoger als nodig */
-@media (max-width: 420px) and (orientation: portrait) {
-  body { background-position: center 48% !important; }
-}
-
-/* ------------ DESKTOP / BREED SCHERM ------------ */
-/* Zodra het scherm breder is (meer landscape dan portrait), switchen we. */
-@media (min-aspect-ratio: 4/3) {
-  body {
-    background-image: url("/splash/splash-desktop-1920x1080.png") !important;
-    background-position: center center !important;
-    background-size: cover !important;
-  }
-}
-
-/* Extra: superbrede monitors (ultrawide) – iets hoger kaderen */
-@media (min-aspect-ratio: 21/9) {
-  body { background-position: center 52% !important; }
-}
-
-/* ------------ Typografie/links (optioneel, basic) ------------ */
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   color: #eaeaea;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
-
-/* Links in navbar of elders – neutraal */
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }

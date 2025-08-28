@@ -1,33 +1,47 @@
+// pages/_app.js
 import "../styles/globals.css";
-import Link from "next/link";
 
-function Header() {
+function Background() {
+  const style = {
+    position: "fixed",
+    inset: 0,
+    width: "100vw",
+    height: "100vh",
+    objectFit: "cover",
+    objectPosition: "center",
+    zIndex: -1,
+    pointerEvents: "none",
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    touchAction: "none",
+    backgroundColor: "#000"
+  };
+
   return (
-    <header className="site-header">
-      <div className="header-inner">
-        <Link href="/" className="brand-link">
-          <span className="brand-title">Scherp in de Struiken</span>
-        </Link>
-        <nav className="top-nav">
-          <Link href="/start" className="top-link">Start</Link>
-          <Link href="/blog" className="top-link">Blog</Link>
-          <Link href="/fotopagina" className="top-link">Foto</Link>
-          <Link href="/puzzelpagina" className="top-link">Puzzel</Link>
-          <Link href="/wedstrijd" className="top-link">Wedstrijd</Link>
-        </nav>
-      </div>
-    </header>
+    <picture style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
+      {/* Desktop/breedbeeld bron */}
+      <source
+        media="(min-aspect-ratio: 4/3)"
+        srcSet="/splash/splash-desktop-1920x1080.png?v=desk"
+      />
+      {/* Fallback = mobiel/portret */}
+      <img
+        src="/splash/splash-iphone15-v3.jpeg?v=mob"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        fetchPriority="high"
+        style={style}
+      />
+    </picture>
   );
 }
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Header />
+      <Background />
       <Component {...pageProps} />
-      <footer style={{opacity:.6,fontSize:12,textAlign:'center',padding:'12px 8px'}}>
-        Build: {process.env.NEXT_PUBLIC_BUILD_TIME || 'dev'}
-      </footer>
     </>
   );
 }
