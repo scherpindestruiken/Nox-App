@@ -1,24 +1,21 @@
-// pages/_app.js
-import '@/styles/globals.css'
-import Head from 'next/head'
+import "@/styles/globals.css";
+import Head from "next/head";
+import NavBar from "@/components/NavBar";
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
         <title>Scherp in de Struiken</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-
-        {/* PWA manifest */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, viewport-fit=cover" />
+        <meta name="theme-color" content="#0f2f24" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/NOX_favicon.jpeg" />
-
-        {/* Splash screens */}
-        <link rel="apple-touch-startup-image" href="/splash/splash-desktop-1920x1080.png" media="(min-width: 1024px)" />
-        <link rel="apple-touch-startup-image" href="/splash/splash-iphone15-v3.png" media="(max-width: 768px)" />
+        <link rel="preload" as="image" href="/splash/splash-iphone15-v3.png" />
+        <link rel="preload" as="image" href="/splash/splash-desktop-1920x1080.png" />
       </Head>
+      <NavBar />
       <Component {...pageProps} />
     </>
-  )
+  );
 }

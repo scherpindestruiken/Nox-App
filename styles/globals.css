@@ -1,53 +1,122 @@
-/* styles/globals.css */
+:root{
+  --bg:#000;
+  --text:#eaeaea;
+  --muted:#cfd3d6;
 
-/* Reset */
-*, *::before, *::after { box-sizing: border-box; }
-html, body, #__next { height: 100%; margin: 0; padding: 0; }
-body {
-  color: #eaeaea;
-  background: #000; /* fallback als image niet laadt */
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --green-900:#0b241c;
+  --green-850:#0f2f24;
+  --green-800:#12362a;
+  --green-700:#1a4b3a;
+  --green-600:#2a6d57;
+
+  --bar-bg:var(--green-850);
+  --bar-active:var(--green-800);
+  --bar-hover:rgba(255,255,255,.06);
+  --bar-border:rgba(255,255,255,.08);
+
+  --focus:#8fb3ff;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+
+  --nav-h:56px;
+  --radius:12px;
+  --radius-sm:9px;
+  --fs-base:15px;
+  --font:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
-/* Hoogte correct op iOS (100dvh waar beschikbaar) */
-:root { --header-height: 0px; }
-main { min-height: calc(100vh - var(--header-height)); }
-@supports (height: 100dvh) {
-  main { min-height: calc(100dvh - var(--header-height)); }
+*,*::before,*::after{box-sizing:border-box}
+html,body,#__next{height:100%;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  font-size:var(--fs-base);
+  color:var(--text);
+  background:var(--bg);
+  background-image:url("/splash/splash-iphone15-v3.png");
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
 }
-
-/* ====== SPLASH ACHTERGROND ====== */
-/* Standaard: mobiel/portret */
-body {
-  background-image: url("/splash/splash-iphone15-v3.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;     /* beeldvullend */
-  /* Geen background-attachment: fixed; iOS doet daar toch raar mee */
+@media (min-aspect-ratio:4/3),(min-width:1024px){
+  body{background-image:url("/splash/splash-desktop-1920x1080.png")}
 }
-
-/* Desktop/breedbeeld */
-@media (min-aspect-ratio: 4/3), (min-width: 1024px) {
-  body {
-    background-image: url("/splash/splash-desktop-1920x1080.png");
-  }
+main{min-height:calc(100vh - var(--nav-h))}
+@supports (height:100dvh){
+  main{min-height:calc(100dvh - var(--nav-h))}
 }
+a{text-decoration:none;color:inherit}
 
-/* ====== OUDE REGELS UITSCHAKELEN ======
-   Alles wat eerder je splash verstopte, neutraliseren zonder slopen.
-*/
-.splash, .splash-img, .hero, .hero--mag {
-  /* had je hier ooit display:none !important; etc., dat halen we weg */
-  background: none;             /* laat body de achtergrond verzorgen */
-  background-image: none;
-  box-shadow: none;
+.nav-root{
+  position:sticky;top:0;z-index:50;height:var(--nav-h);
+  display:grid;align-items:center;isolation:isolate;
+  border-bottom:1px solid var(--bar-border);
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
 }
-
-/* Als er nog componenten waren die een extra overlay toevoegden */
-.hero--mag::after {
-  content: none !important;
+.nav-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(120% 160% at 10% -20%, rgba(46,87,74,.25) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(130% 190% at 90% 120%, rgba(30,70,55,.20) 0%, rgba(0,0,0,0) 65%),
+    linear-gradient(0deg, rgba(255,255,255,.04), rgba(255,255,255,.04)),
+    var(--bar-bg);
+  background-blend-mode:soft-light,soft-light,overlay,normal;
 }
+@supports (backdrop-filter:blur(6px)){
+  .nav-bg{backdrop-filter:saturate(115%) blur(6px);-webkit-backdrop-filter:saturate(115%) blur(6px)}
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:8px 16px;
+  display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;
+}
+.brand{display:inline-flex;align-items:center;gap:10px;color:#f4f7f6;opacity:.98}
+.brand:hover{opacity:1}
+.brand-logo-wrap{
+  display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.brand-icon{
+  width:26px;height:26px;border-radius:6px;object-fit:cover;
+  filter:saturate(1.05) hue-rotate(340deg) contrast(1.02);
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset, 0 0 10px rgba(42,109,87,.35);
+}
+.brand-name{font-weight:600;letter-spacing:.2px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
 
-/* Links */
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; }
+.nav-links{display:none;gap:6px;align-items:center}
+.nav-link{
+  position:relative;display:inline-flex;align-items:center;
+  padding:8px 12px;border-radius:var(--radius-sm);color:#ecf2ef;opacity:.94
+}
+.nav-link:hover{background:var(--bar-hover);opacity:1}
+.nav-link:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.nav-link .nav-link-label{position:relative;padding-bottom:2px}
+.nav-link .nav-link-label::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:transparent;
+  transform:scaleX(0);transform-origin:center;transition:transform .22s ease, background-color .22s ease
+}
+.nav-link:hover .nav-link-label::after{background:var(--green-700);transform:scaleX(1)}
+.nav-link.active{background:var(--bar-active);color:#fff}
+.nav-link.active .nav-link-label::after{background:var(--green-600);transform:scaleX(1)}
+
+.nav-mobile{position:relative}
+.hamburger{
+  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,.06);color:#f4f7f6;border:1px solid var(--bar-border);cursor:pointer
+}
+.hamburger:hover{background:rgba(255,255,255,.10)}
+.hamburger:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+.mobile-panel{
+  position:absolute;right:0;top:calc(100% + 8px);min-width:220px;background:var(--green-900);
+  border:1px solid var(--bar-border);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow);
+  display:grid;gap:4px;transform:translateY(-6px);opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease
+}
+.mobile-panel.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.mobile-link{padding:10px 12px;border-radius:var(--radius-sm);color:#ecf2ef}
+.mobile-link:hover{background:rgba(255,255,255,.06)}
+.mobile-link.active{background:var(--bar-active)}
+
+@media (min-width:860px){
+  .nav-links{display:inline-flex}
+  .nav-mobile{display:none}
+}
+::selection{background:rgba(42,109,87,.35);color:#fff}
