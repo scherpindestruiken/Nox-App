@@ -120,3 +120,44 @@ a{text-decoration:none;color:inherit}
   .nav-mobile{display:none}
 }
 ::selection{background:rgba(42,109,87,.35);color:#fff}
+
+/* ===========================
+   NOX: Menu-ink override (20250828_155548)
+   Gepipetteerde tint uit splash-tekst
+   =========================== */
+:root{
+  --menu-ink: #8C8952;
+}
+
+.nav-link,
+.nav-link:visited,
+.mobile-link,
+.mobile-link:visited,
+.brand-name{
+  color: var(--menu-ink) !important;
+}
+
+/* Hover: subtiel lichter via text-shadow, geen schreeuwerige kleurwissel */
+.nav-link:hover .nav-link-label,
+.mobile-link:hover{
+  text-shadow: 0 0 6px rgba(140,137,82,0.35);
+}
+
+/* Active state: zelfde inktkleur met onderlijntje voor feedback */
+.nav-link.active .nav-link-label,
+.mobile-link.active{
+  position: relative;
+}
+.nav-link.active .nav-link-label::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-3px; height:2px;
+  background: var(--menu-ink);
+  transform: none;
+}
+
+/* Brandnaam ietsje duidelijker zonder de kleur kwijt te raken */
+.brand-name{
+  font-weight: 600;
+  letter-spacing: .2px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.35);
+}
