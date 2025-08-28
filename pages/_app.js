@@ -1,47 +1,24 @@
 // pages/_app.js
-import "../styles/globals.css";
-
-function Background() {
-  const style = {
-    position: "fixed",
-    inset: 0,
-    width: "100vw",
-    height: "100vh",
-    objectFit: "cover",
-    objectPosition: "center",
-    zIndex: -1,
-    pointerEvents: "none",
-    userSelect: "none",
-    WebkitUserSelect: "none",
-    touchAction: "none",
-    backgroundColor: "#000"
-  };
-
-  return (
-    <picture style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
-      {/* Desktop/breedbeeld bron */}
-      <source
-        media="(min-aspect-ratio: 4/3)"
-        srcSet="/splash/splash-desktop-1920x1080.png?v=desk"
-      />
-      {/* Fallback = mobiel/portret */}
-      <img
-        src="/splash/splash-iphone15-v3.jpeg?v=mob"
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        fetchPriority="high"
-        style={style}
-      />
-    </picture>
-  );
-}
+import '@/styles/globals.css'
+import Head from 'next/head'
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Background />
+      <Head>
+        <title>Scherp in de Struiken</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+
+        {/* PWA manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/NOX_favicon.jpeg" />
+
+        {/* Splash screens */}
+        <link rel="apple-touch-startup-image" href="/splash/splash-desktop-1920x1080.png" media="(min-width: 1024px)" />
+        <link rel="apple-touch-startup-image" href="/splash/splash-iphone15-v3.png" media="(max-width: 768px)" />
+      </Head>
       <Component {...pageProps} />
     </>
-  );
+  )
 }
