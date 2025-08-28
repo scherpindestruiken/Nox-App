@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "../styles/globals.css";
 import Link from "next/link";
 
@@ -26,14 +25,9 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Header />
       <Component {...pageProps} />
+      <footer style={{opacity:.6,fontSize:12,textAlign:'center',padding:'12px 8px'}}>
+        Build: {process.env.NEXT_PUBLIC_BUILD_TIME || 'dev'}
+      </footer>
     </>
   );
-}
-
-// -- SW update listener: refresh bij nieuwe worker --
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    // nieuwe SW heeft controle, herlaad om oude cache los te laten
-    window.location.reload();
-  });
 }
