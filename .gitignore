@@ -1,8 +1,8 @@
-# Zie https://help.github.com/articles/ignoring-files/
-
-# dependencies
-/node_modules
-/.pnp
+# =========================================================
+# Node / Yarn / Dependencies
+# =========================================================
+node_modules
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,40 +10,57 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# =========================================================
+# Testing / Coverage
+# =========================================================
+coverage
 
-# next.js
-/.next/
-/out/
-/dist
+# =========================================================
+# Next.js build output
+# =========================================================
+.next
+out
+dist
 
-# logs
+# =========================================================
+# Logs
+# =========================================================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.log
 
-# Editor/IDE rommel
+# =========================================================
+# IDE / OS clutter
+# =========================================================
 .vscode
 .idea
 .DS_Store
 
-# PWA gegenereerde bestanden (door next-pwa)
+# =========================================================
+# PWA gegenereerde bestanden (next-pwa build artifacts)
+# =========================================================
 public/sw.js
 public/workbox-*.js
 public/fallback-*.js
 public/precache-manifest.*.js
 
+# =========================================================
 # Environment bestanden (nooit committen)
+# =========================================================
 .env
 .env.local
 .env.production
 .env.development
 .env.test
 
-# Voorbeeldbestand wél committen
+# Voorbeeld wél committen
 !.env.example
-# Ignore lokale helper scripts
-*.sh
+
+# =========================================================
+# Lokale helper scripts (houden we alleen lokaal)
+# =========================================================
+commit-all.sh
+commit-and-push-hero.sh
+update-hero.sh
