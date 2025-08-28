@@ -1,6 +1,6 @@
 [build]
 command = "npm run build"
-publish = ".next"
+publish = ".next"  # Dit is de output van Next.js
 
 [build.environment]
 NODE_VERSION = "20"
