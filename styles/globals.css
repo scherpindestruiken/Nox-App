@@ -1,27 +1,126 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Zorg dat html/body altijd 100% vullen en zwart zijn */
-html, body {
-  @apply m-0 p-0 font-sans;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-color: black;
-  color: white;
-  overscroll-behavior: none;
+/* Basis */
+* { box-sizing: border-box; }
+html, body, #__next { height: 100%; }
+body {
+  margin: 0;
+  background: #0b0c0f;
+  color: #e8e8ea;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
 }
 
-/* Zorg dat alle elementen correct box-sizing gebruiken */
-*, *::before, *::after {
-  box-sizing: border-box;
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(13,16,22,0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+.header-inner {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px;
+}
+.brand-link {
+  text-decoration: none;
+  color: #fff;
+}
+.brand-title {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.top-nav { display: flex; gap: 10px; }
+.top-link {
+  text-decoration: none;
+  color: #d8d8dc;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.top-link:hover { border-color: rgba(255,255,255,0.12); color: #fff; }
 
-/* Zorg dat het hoofdvlak van de app ook 100% vult */
-main {
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
+/* Home */
+.home {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.hero {
+  text-align: center;
+  max-width: 720px;
+  padding: 28px 24px 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  background:
+    radial-gradient(800px 400px at 20% -10%, rgba(0, 153, 255, 0.10), transparent 60%),
+    radial-gradient(600px 300px at 110% 90%, rgba(180, 0, 255, 0.08), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+.hero-title { font-size: 28px; margin: 0 0 10px; }
+.hero-sub { opacity: 0.85; margin: 0 0 22px; }
+
+/* CTA */
+.cta {
+  display: inline-block;
+  text-decoration: none;
+  color: #0b0c0f;
+  background: #b7ff64;
+  border: 1px solid #9de24f;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 14px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 8px 20px rgba(183,255,100,0.25);
+}
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(183,255,100,0.35);
+}
+.hint { opacity: 0.65; font-size: 14px; margin-top: 10px; }
+
+/* Page */
+.page { padding: 24px; max-width: 1000px; margin: 0 auto; }
+.page-title { margin: 6px 0 6px; font-size: 26px; }
+.page-sub { opacity: 0.8; margin: 0 0 16px; }
+
+/* Menu grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+}
+@media (min-width: 720px) {
+  .menu-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+}
+.menu-card {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 18px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+  min-height: 120px;
+}
+.menu-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
+}
+.menu-emoji { font-size: 28px; margin-bottom: 10px; }
+.menu-title { font-weight: 700; margin-bottom: 4px; }
+.menu-sub { opacity: 0.8; font-size: 14px; }
+
+/* Safe areas (iOS) */
+@supports (padding: max(0px)) {
+  .header-inner { padding-top: max(0px, env(safe-area-inset-top)); }
 }
