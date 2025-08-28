@@ -3,11 +3,20 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="home">
-      <section className="hero">
-        <h1 className="hero-title">Welkom in het struikgewas</h1>
-        <p className="hero-sub">Eén knop. Minder gedoe. Daarna kies je je pad.</p>
-        <Link href="/start" className="cta">Start het avontuur</Link>
-        <p className="hint">Tip: je kunt ook altijd via de bovenbalk naar een pagina.</p>
+      <section className="hero hero--mag">
+        <div className="hero-inner">
+          <h1 className="hero-title">Scherp in de Struiken</h1>
+          <p className="hero-tagline">Waar bladeren ritselen en sarcasme groeit.</p>
+
+          <div className="hero-actions">
+            <Link href="/blog" className="btn btn-primary">Blog lezen</Link>
+            <Link href="/fotopagina" className="btn btn-ghost">Foto’s kijken</Link>
+          </div>
+
+          <div className="hero-secondary">
+            <Link href="/start" className="text-link">of open het startmenu</Link>
+          </div>
+        </div>
       </section>
     </main>
   );

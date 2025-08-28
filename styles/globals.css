@@ -124,3 +124,108 @@ body {
 @supports (padding: max(0px)) {
   .header-inner { padding-top: max(0px, env(safe-area-inset-top)); }
 }
+/* ====== HERO v2 (optie 1) ====== */
+.home {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.hero--mag {
+  position: relative;
+  width: 100%;
+  min-height: min(74vh, 780px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(0, 153, 255, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 110% 90%, rgba(180, 0, 255, 0.08), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)),
+    url("/NOX_homescreen.jpeg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.hero--mag::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.38), rgba(0,0,0,0.55));
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(24px, 6vw, 56px);
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(28px, 4.6vw, 54px);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 0 0 6px;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+}
+
+.hero-tagline {
+  margin: 0 0 22px;
+  opacity: 0.92;
+  font-size: clamp(16px, 2.2vw, 20px);
+}
+
+.hero-actions {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+  will-change: transform;
+}
+
+.btn-primary {
+  color: #0b0c0f;
+  background: #b7ff64;
+  border-color: #9de24f;
+  box-shadow: 0 8px 20px rgba(183,255,100,0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(183,255,100,0.35);
+}
+
+.btn-ghost {
+  color: #e8e8ea;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.16);
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.10);
+}
+
+.hero-secondary { margin-top: 12px; opacity: 0.8; }
+.text-link {
+  color: #d6ffd0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.text-link:hover { color: #ffffff; }
+/* ====== /HERO v2 ====== */
+
