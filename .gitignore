@@ -64,3 +64,13 @@ public/precache-manifest.*.js
 commit-all.sh
 commit-and-push-hero.sh
 update-hero.sh
+
+# Ignore overige helper scripts
+commit-and-push-hero.sh
+update-hero.sh
+pwa-assets-setup.sh
+quick-pwa-repair.sh
+
+# Backups en rapporten
+*.bak
+*.report.html
