@@ -469,3 +469,37 @@ h1,h2,h3,h4{
 body {
   background: var(--nox-green);
 }
+
+/* ===== Fix: mobiele home-splash zonder 'fixed' (iOS-bug) ===== */
+:root {
+  --nox-green: #0b2d26;
+}
+
+/* Zorg dat de pagina echt de hoogte pakt, ook op iOS met dynamische toolbars */
+html, body { height: 100%; }
+
+/* Baseline voor alle pagina's */
+.nox-page {
+  min-height: calc(100svh - 64px); /* small viewport unit voor mobiele browsers */
+}
+
+/* Home: gebruik de juiste mobiele splash (v3), zonder 'fixed' */
+.page-home {
+  background:
+    url("/splash/splash-iphone15-v3.png") center center / cover no-repeat,
+    var(--nox-green);
+}
+
+/* Subpagina's: donkergroen */
+.page-default {
+  background: var(--nox-green);
+}
+
+/* Desktop: geef home wél 'fixed' en de brede desktop-afbeelding */
+@media (min-width: 900px) {
+  .page-home {
+    background:
+      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
+      var(--nox-green);
+  }
+}
