@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -24,7 +25,7 @@ export default function NavBar(){
             loading="eager"
             decoding="async"
           />
-          <span className="nox-title">Scherp in de Struiken</span>
+          <span className="nox-title"><Link href="/" className="text-2xl font-bold hover:underline"><Link href="/" className="text-2xl font-bold hover:underline">Scherp in de Struiken</Link></Link></span>
         </Link>
 
         {/* Desktop links */}
