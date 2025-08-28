@@ -89,3 +89,4 @@ set-splash-clean.sh
 !update-splash-auto.sh
 !set-splash.sh
 !set-start-splash.sh
+save-clean.sh
