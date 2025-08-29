@@ -4,14 +4,13 @@ import { useState } from "react";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-
   return (
     <header className="nox-nav" role="banner" aria-label="Hoofdnavigatie">
       <div className="nox-nav-inner">
         <Link href="/" className="nox-brand" aria-label="Home">
           <Image
-            src="/images/logo.png"   // zorg dat public/images/logo.png bestaat
-            alt="NOX logo"
+            src="/images/logo.png"
+            alt="NOX"
             width={40}
             height={40}
             priority
@@ -28,26 +27,19 @@ export default function NavBar() {
           <Link href="/wedstrijd"    className="nox-link">Wedstrijd</Link>
         </nav>
 
-        <button
-          type="button"
-          className="nox-burger"
-          aria-label="Menu"
-          aria-controls="nox-mobile-menu"
-          aria-expanded={open}
-          onClick={() => setOpen(v => !v)}
-        >
+        <button type="button" className="nox-burger" onClick={() => setOpen(v => !v)} aria-label="Menu" aria-expanded={open}>
           <span className="nox-burger-bar" />
           <span className="nox-burger-bar" />
           <span className="nox-burger-bar" />
         </button>
       </div>
 
-      <div id="nox-mobile-menu" className={`nox-mobile ${open ? "open" : ""}`}>
-        <Link href="/"             className="nox-mobile-link" onClick={() => setOpen(false)}>Home</Link>
-        <Link href="/blog"         className="nox-mobile-link" onClick={() => setOpen(false)}>Blog</Link>
-        <Link href="/fotopagina"   className="nox-mobile-link" onClick={() => setOpen(false)}>Foto&apos;s</Link>
-        <Link href="/puzzelpagina" className="nox-mobile-link" onClick={() => setOpen(false)}>Puzzel</Link>
-        <Link href="/wedstrijd"    className="nox-mobile-link" onClick={() => setOpen(false)}>Wedstrijd</Link>
+      <div className={`nox-mobile ${open ? "open" : ""}`}>
+        <Link href="/"             className="nox-mobile-link" onClick={()=>setOpen(false)}>Home</Link>
+        <Link href="/blog"         className="nox-mobile-link" onClick={()=>setOpen(false)}>Blog</Link>
+        <Link href="/fotopagina"   className="nox-mobile-link" onClick={()=>setOpen(false)}>Foto&apos;s</Link>
+        <Link href="/puzzelpagina" className="nox-mobile-link" onClick={()=>setOpen(false)}>Puzzel</Link>
+        <Link href="/wedstrijd"    className="nox-mobile-link" onClick={()=>setOpen(false)}>Wedstrijd</Link>
       </div>
     </header>
   );
