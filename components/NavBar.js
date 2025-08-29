@@ -3,12 +3,12 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-black text-green-300 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center space-x-3" aria-label="Home">
+    <header className="nox-nav" role="banner" aria-label="Hoofdnavigatie">
+      <div className="nox-nav-inner">
+        <Link href="/" className="nox-brand" aria-label="Home">
           <Image
             src="/images/logo.png"
             alt="NOX logo"
@@ -16,37 +16,38 @@ export default function NavBar() {
             height={40}
             priority
           />
-          <span className="text-xl font-bold tracking-wide">
-            Scherp in de Struiken
-          </span>
+          <span className="nox-title">Scherp in de Struiken</span>
         </Link>
 
-        <nav className="hidden md:flex space-x-6">
-          <Link href="/" className="hover:text-white">Home</Link>
-          <Link href="/blog" className="hover:text-white">Blog</Link>
-          <Link href="/fotopagina" className="hover:text-white">Foto&apos;s</Link>
-          <Link href="/puzzelpagina" className="hover:text-white">Puzzel</Link>
-          <Link href="/wedstrijd" className="hover:text-white">Wedstrijd</Link>
+        <nav className="nox-menu" aria-label="Hoofdmenu">
+          <Link href="/"             className="nox-link">Home</Link>
+          <Link href="/blog"         className="nox-link">Blog</Link>
+          <Link href="/fotopagina"   className="nox-link">Foto's</Link>
+          <Link href="/puzzelpagina" className="nox-link">Puzzel</Link>
+          <Link href="/wedstrijd"    className="nox-link">Wedstrijd</Link>
         </nav>
 
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-800"
+          type="button"
+          className="nox-burger"
           aria-label="Menu"
+          aria-controls="nox-mobile-menu"
+          aria-expanded={open}
+          onClick={() => setOpen(v => !v)}
         >
-          <span className="text-green-300">☰</span>
+          <span className="nox-burger-bar" />
+          <span className="nox-burger-bar" />
+          <span className="nox-burger-bar" />
         </button>
       </div>
 
-      {isOpen && (
-        <nav className="md:hidden bg-black px-4 pb-4 space-y-2">
-          <Link href="/" className="block hover:text-white">Home</Link>
-          <Link href="/blog" className="block hover:text-white">Blog</Link>
-          <Link href="/fotopagina" className="block hover:text-white">Foto&apos;s</Link>
-          <Link href="/puzzelpagina" className="block hover:text-white">Puzzel</Link>
-          <Link href="/wedstrijd" className="block hover:text-white">Wedstrijd</Link>
-        </nav>
-      )}
+      <div id="nox-mobile-menu" className={`nox-mobile ${open ? "open" : ""}`}>
+        <Link href="/"             className="nox-mobile-link" onClick={() => setOpen(false)}>Home</Link>
+        <Link href="/blog"         className="nox-mobile-link" onClick={() => setOpen(false)}>Blog</Link>
+        <Link href="/fotopagina"   className="nox-mobile-link" onClick={() => setOpen(false)}>Foto's</Link>
+        <Link href="/puzzelpagina" className="nox-mobile-link" onClick={() => setOpen(false)}>Puzzel</Link>
+        <Link href="/wedstrijd"    className="nox-mobile-link" onClick={() => setOpen(false)}>Wedstrijd</Link>
+      </div>
     </header>
   );
 }

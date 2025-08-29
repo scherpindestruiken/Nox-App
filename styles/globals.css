@@ -545,3 +545,49 @@ body.home-body {
 .page-home article {
   background: transparent;
 }
+
+/* ===== NOX NAV OVERLAY ===================================================== */
+:root{
+  --nox-brand-title: #e9d79b;
+  --nox-link:        #e9d79b;
+  --nox-link-hover:  #ffffff;
+  --nox-border:      rgba(255,255,255,.12);
+}
+.nox-nav{
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: transparent !important;
+}
+.nox-nav-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding:12px 16px; width:min(1200px,94vw); margin:0 auto;
+}
+.nox-brand{display:inline-flex; align-items:center; gap:10px; text-decoration:none;}
+.nox-title{font-weight:800; letter-spacing:.2px; color:var(--nox-brand-title)!important;}
+
+.nox-menu{display:none; gap:18px; align-items:center;}
+@media (min-width: 840px){ .nox-menu{display:inline-flex} }
+
+.nox-link{
+  color:var(--nox-link)!important; text-decoration:none;
+  padding:6px 10px; border-radius:8px;
+  transition:color .15s ease, background .15s ease;
+}
+.nox-link:hover{ color:var(--nox-link-hover)!important; background:rgba(255,255,255,.10); }
+
+.nox-burger{
+  display:inline-flex; gap:4px; background:transparent;
+  border:1px solid var(--nox-border); border-radius:8px; padding:6px 10px;
+}
+.nox-burger-bar{ width:16px; height:2px; background:var(--nox-link); display:block; }
+@media (min-width: 840px){ .nox-burger{display:none} }
+
+.nox-mobile{
+  display:none; background:rgba(0,0,0,.45); backdrop-filter:blur(6px);
+  border-top:1px solid var(--nox-border); padding:8px 16px 12px;
+}
+.nox-mobile.open{ display:block; }
+.nox-mobile-link{ display:block; color:var(--nox-link)!important; padding:8px 0; text-decoration:none; }
+.nox-mobile-link:hover{ color:var(--nox-link-hover)!important; }
+/* ========================================================================== */
