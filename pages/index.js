@@ -11,10 +11,10 @@ export default function Home() {
       <section className="hero" aria-label="Splash">
         <picture>
           {/* mobiel eerst */}
-          <source media="(max-width: 767px)" srcSet="/images/home-mobile.png?v=nox-2" />
+          <source media="(max-width: 767px)" srcSet="/splash/home-mobile.png?v=nox-2" />
           {/* desktop fallback */}
           <img
-            src="/images/home-desktop.png?v=nox-2"
+            src="/splash/home-desktop.png?v=nox-2"
             alt="Scherp in de Struiken"
             className="hero-bg"
           />

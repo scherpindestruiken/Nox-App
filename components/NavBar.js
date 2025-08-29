@@ -9,7 +9,7 @@ export default function NavBar() {
       <div className="nox-nav-inner">
         <Link href="/" className="nox-brand" aria-label="Home">
           <Image
-            src="/images/logo.png"
+            src="/splash/logo.png"
             alt="NOX"
             width={40}
             height={40}

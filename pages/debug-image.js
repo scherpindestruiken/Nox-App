@@ -1,5 +1,5 @@
 export default function DebugImage(){
-  const paths = ["/images/home-mobile.png","/images/home-desktop.png","/images/logo.png"];
+  const paths = ["/splash/home-mobile.png","/splash/home-desktop.png","/splash/logo.png"];
   return (
     <main style={{padding:"16px",color:"#eee",fontFamily:"system-ui"}}>
       <h1>Debug images</h1>
