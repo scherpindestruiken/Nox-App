@@ -612,3 +612,17 @@ body.home-body {
 
 /* Zorg dat de nav als overlay bovenop de hero staat (reeds ingesteld) */
 body{ background: #0d1e1a; }
+
+/* --- hard kill dubbele titels op mobiel --- */
+@media (max-width: 767px){
+  .hero h1,
+  .hero .hero-title,
+  .splash h1,
+  .splash .hero-title,
+  .home h1,
+  .home .hero-title {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+/* bust 1756466369 */
