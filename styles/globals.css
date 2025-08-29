@@ -1,121 +1,98 @@
-/* ====== BASIS ====== */
-:root {
-  --ink: #0a2e12;           /* donkere groentint voor tekst/links */
-  --ink-contrast: #ffffff;  /* witte variant, indien nodig */
+:root{
+  --nox-ink:#16391E;          /* donkergroen tekst */
+  --nox-ink-weak:#EAF6EE;     /* lichtgroen menu hover/active */
+  --nox-bg:#000;              /* fallback */
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-html { scroll-behavior: smooth; }
+/* Basis reset */
+*{box-sizing:border-box}
+html,body,#__next{height:100%}
+html,body{margin:0;padding:0}
 
-body {
-  margin: 0;
-  color: var(--ink);
-  /* Zorg dat we echt de volle viewport krijgen (iOS/Android verschillen) */
-  min-height: 100svh;
-  min-height: 100dvh;
-  background: #000; /* fallback tijdens eerste paint */
+/* Body achtergrond: mobiel = home-mobile, desktop = home-desktop */
+body{
+  color:var(--nox-ink);
+  background:#000 url("/splash/home-mobile.png?v=6") right center / cover no-repeat fixed;
+  min-height:100svh; /* iOS safe */
 }
 
-/* ====== NAVBALK TRANSPARANT BOVENOP ====== */
-.nox-nav {
-  position: fixed;
-  top: env(safe-area-inset-top);
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: calc(8px + env(safe-area-inset-top)) 16px 8px 16px;
-  background: transparent;        /* geen groene strip meer */
-  color: var(--ink-contrast);
-}
-.nox-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.nox-brand img { width: 36px; height: 36px; display: block; }
-.nox-title { font-weight: 800; font-size: clamp(18px, 2.5vw, 24px); color: #fff; }
-.nox-links { margin-left: auto; display: flex; gap: clamp(8px, 2vw, 20px); }
-.nox-link { color: #fff; text-decoration: none; font-weight: 600; }
-.nox-link:hover { text-decoration: underline; }
-
-/* ====== SPLASH/HEADING ACHTERGROND ======
-   We leggen een vaste achtergrondlaag die het hele scherm bedekt,
-   met focus naar RECHTS zodat de tekstballon niet half buiten beeld valt.
-*/
-.home-hero {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-repeat: no-repeat;
-  background-position: right center; /* focus rechts */
-  background-size: cover;
-  /* Desktop default */
-  background-image: image-set(
-    url("/images/home-desktop.png") type("image/png")
-  );
-  /* fallback als image-set niet wordt ondersteund */
-  background-image: url("/images/home-desktop.png");
+/* Hoogte correct in iOS (address bar in/out) */
+@supports (height: 100dvh){
+  body{min-height:100dvh}
 }
 
-/* Content boven de hero */
-.home-content {
-  position: relative;
-  z-index: 1;
-  padding-top: calc(64px + env(safe-area-inset-top)); /* ruimte voor nav */
-  padding-left: max(16px, env(safe-area-inset-left));
-  padding-right: max(16px, env(safe-area-inset-right));
-  padding-bottom: max(16px, env(safe-area-inset-bottom));
-}
-
-/* ====== MOBIEL/SMALLER: gebruik mobiele splash en nog wat extra focus rechts ====== */
-/* Heel smal (moderne telefoons ~19.5:9 of smaller) */
-@media (max-aspect-ratio: 9/19) {
-  .home-hero {
-    background-image: image-set(
-      url("/splash/home-mobile.png") type("image/png")
-    );
-    background-image: url("/splash/home-mobile.png");
-    background-position: calc(100% - 8%) center; /* beetje naar links van helt rechts, zodat ballon netjes valt */
-    background-size: cover; /* vul scherm, snij links af indien nodig */
-  }
-}
-
-/* Klassieke 16:9 telefoons of iets breder */
-@media (max-aspect-ratio: 9/16) and (min-aspect-ratio: 9/19) {
-  .home-hero {
-    background-image: image-set(
-      url("/splash/home-mobile.png") type("image/png")
-    );
-    background-image: url("/splash/home-mobile.png");
-    background-position: calc(100% - 10%) center;
-    background-size: cover;
-  }
-}
-
-/* Heel brede/landscape situaties: pak desktop-splash met focus rechts */
-@media (orientation: landscape) and (min-aspect-ratio: 16/10) {
-  .home-hero {
-    background-image: image-set(
-      url("/splash/splash-desktop-1920x1080.png") type("image/png")
-    );
-    background-image: url("/splash/splash-desktop-1920x1080.png");
+/* Landscape telefoons: behoud focus rechts */
+@media (orientation: landscape){
+  body{
     background-position: right center;
-    background-size: cover;
   }
 }
 
-/* ====== VOETTEKST OP MOBIEL NIET DUBBEL ====== */
-.site-footer {
-  position: relative;
-  z-index: 1;
-  padding: 24px 16px max(24px, env(safe-area-inset-bottom));
-  color: #fff;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .site-footer .only-desktop { display: none !important; }
+/* Desktop/tablet ≥768px: desktop splash */
+@media (min-width:768px){
+  body{
+    background:#000 url("/splash/home-desktop.png?v=6") center center / cover no-repeat fixed;
+  }
 }
 
-/* ====== HULPKLASSES ====== */
-.container { max-width: 1100px; margin: 0 auto; }
-.hidden { display: none; }
+/* Extra brede ultrawide monitoren, gebruik 1920x1080 als safe */
+@media (min-aspect-ratio: 21/9){
+  body{
+    background-image:url("/splash/splash-desktop-1920x1080.png?v=6");
+    background-position:center center;
+  }
+}
+
+/* NAVBAR */
+.nox-nav{
+  position:fixed;
+  top:env(safe-area-inset-top);
+  left:0; right:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  background:transparent; /* op splash, geen extra balk */
+  -webkit-backdrop-filter:saturate(1);
+  backdrop-filter:saturate(1);
+}
+.nox-brand{
+  display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--nox-ink);
+}
+.nox-brand img{height:36px;width:auto;display:block}
+.nox-title{font-weight:800;font-size:18px;letter-spacing:.2px}
+.nox-menu{
+  margin-left:auto;
+  display:flex;gap:14px;flex-wrap:nowrap;
+}
+.nox-menu a{
+  color:var(--nox-ink);
+  text-decoration:none;
+  font-weight:700;
+  padding:8px 10px;
+  border-radius:10px;
+  line-height:1;
+}
+.nox-menu a:hover,
+.nox-menu a[aria-current="page"]{
+  background:rgba(255,255,255,.22);
+  color:var(--nox-ink-weak);
+}
+
+/* Mobiel stacking netjes */
+@media (max-width:420px){
+  .nox-title{font-size:16px}
+  .nox-menu a{padding:6px 8px;font-weight:700}
+}
+
+/* Onderste footer-tekst (voorkom dubbele render op mobiel) */
+.nox-footer{
+  position:fixed;left:0;right:0;bottom:env(safe-area-inset-bottom);
+  text-align:center;
+  color:var(--nox-ink-weak);
+  font-weight:700;
+  padding:10px 12px;
+  text-shadow:0 1px 2px rgba(0,0,0,.5);
+  pointer-events:none;
+}
