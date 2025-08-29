@@ -1,89 +1,112 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Algemene body-styling */
+/* Basis reset */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #000; /* fallback zwart */
-  color: #fff;
+  color: #e9e9e9;
+  background: #000; /* pure zwart fallback */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  overflow-x: hidden;
 }
 
-/* Splashscreen achtergrond */
-.splash-screen {
+/* Kleuren */
+:root{
+  --nox-brand-title: #e9d79b;
+  --nox-link:        #e9d79b;
+  --nox-link-hover:  #ffffff;
+  --nox-border:      rgba(255,255,255,.12);
+}
+
+/* HERO: echte afbeelding die full-screen vult */
+.hero {
   position: relative;
-  height: 100vh;
   width: 100%;
-  background: url('/images/NOX_home.png') no-repeat center center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  height: 100vh;          /* volle viewport */
+  overflow: hidden;
+}
+.hero picture, .hero img { display: block; width: 100%; height: 100%; }
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* bedek volledig */
+  object-position: center;
 }
 
-/* Titel op splashscreen */
-.splash-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #f5f5f5;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-  z-index: 10;
-  margin: 0;
+/* Optionele desktop-only titel, standaard uit */
+.hero-title { 
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: 6vh; margin: 0;
+  font-weight: 800; letter-spacing: .02em;
+  color: var(--nox-brand-title);
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  font-size: clamp(28px, 6vw, 72px);
+}
+@media (max-width: 767px){
+  .hero-title, .hero h1, .home h1 { display: none !important; }
+}
+.desktop-only { display: block; }
+@media (max-width: 767px){ .desktop-only { display: none !important; } }
+
+/* Container onder de hero */
+.container{ width:min(1100px, 92vw); margin: 24px auto; }
+
+/* NAVBAR — transparante overlay bovenop de hero */
+.nox-nav{
+  position: fixed;  /* altijd bovenaan */
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: transparent !important; /* geen aparte balk */
+  border: none !important;
+  box-shadow: none !important;
+  padding-top: env(safe-area-inset-top); /* iOS notch */
+}
+.nox-nav-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding:12px 16px; width:min(1200px,94vw); margin:0 auto;
+}
+.nox-brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+.nox-title{ font-weight:800; letter-spacing:.2px; color:var(--nox-brand-title) !important; }
+
+/* Desktop menu */
+.nox-menu{ display:none; gap:18px; align-items:center; }
+@media (min-width: 840px){ .nox-menu{ display:inline-flex; } }
+
+/* Links */
+.nox-link{
+  color: var(--nox-link) !important;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: color .15s ease, background .15s ease;
+}
+.nox-link:hover{
+  color: var(--nox-link-hover) !important;
+  background: rgba(255,255,255,.10);
 }
 
-/* NavBar bovenop splashscreen */
-.nox-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent; /* geen aparte balk */
-  z-index: 20;
+/* Burger mobiel */
+.nox-burger{
+  display:inline-flex; gap:4px; background:transparent;
+  border:1px solid var(--nox-border); border-radius:8px; padding:6px 10px;
 }
+.nox-burger-bar{ width:16px; height:2px; background: var(--nox-link); display:block; }
+@media (min-width: 840px){ .nox-burger{ display:none; } }
+
+/* Mobiel menu */
+.nox-mobile{
+  display:none; background: rgba(0,0,0,.45); backdrop-filter: blur(6px);
+  border-top: 1px solid var(--nox-border); padding: 8px 16px 12px;
+  margin-top: 56px; /* net onder nav */
+}
+.nox-mobile.open{ display:block; }
+.nox-mobile-link{
+  display:block; color: var(--nox-link) !important;
+  text-decoration:none; padding:8px 0;
+}
+.nox-mobile-link:hover{ color: var(--nox-link-hover) !important; }
 
 /* Logo */
-.nox-logo {
-  height: 48px;
-  width: auto;
-}
-
-/* Navigatie links */
-.nox-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nox-links a {
-  color: #f5f5f5;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-.nox-links a:hover {
-  color: #8fd694; /* groen accent */
-}
-
-/* Mobiel */
-@media (max-width: 768px) {
-  .splash-title {
-    font-size: 1.8rem;
-    padding: 0 1rem;
-  }
-
-  .nox-links {
-    gap: 1rem;
-  }
-
-  .nox-links a {
-    font-size: 1rem;
-  }
-}
+.nox-logo{ width: 40px; height: 40px; object-fit: contain; display:block; }

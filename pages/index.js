@@ -8,15 +8,24 @@ export default function Home() {
         <meta name="description" content="NOX — Scherp in de Struiken" />
       </Head>
 
-      {/* Spacer zodat content niet onder de overlay-nav verdwijnt */}
-      <div style={{ height: "82vh" }} aria-hidden="true" />
+      <section className="hero" aria-label="Splash">
+        <picture>
+          {/* Mobiel: eigen afbeelding */}
+          <source media="(max-width: 767px)" srcSet="/images/NOX_home.png" />
+          {/* Desktop fallback */}
+          <img
+            src="/images/NOX_home_desktop.png"
+            alt="Scherp in de Struiken"
+            className="hero-bg"
+          />
+        </picture>
+        {/* Als je per se een HTML titel wilt op desktop, zet deze aan: */}
+        {/* <h1 className="hero-title desktop-only">Scherp in de Struiken</h1> */}
+      </section>
 
+      {/* Content onder splash; spacer voorkomt overlap met fixed nav op kleine schermen */}
       <main className="container">
-        <p>
-          Welkom in het bos. Content komt hier. De splash staat als
-          body-achtergrond, de NavBar ligt er transparant overheen. Geen dubbele
-          titels, geen rare randen.
-        </p>
+        <p>Welkom. Als je dit leest is het tenminste niet meer zwart.</p>
       </main>
     </>
   );
