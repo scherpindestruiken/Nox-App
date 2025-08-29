@@ -57,3 +57,54 @@ a{color:inherit;text-decoration:none}
 @media (max-width:768px) and (min-aspect-ratio: 9/20) and (max-aspect-ratio: 9/18){
   .home-splash{ background-position:94% center !important; }
 }
+/* ====== MOBILE SPLASH FIX (iPhone/Pixel portrait) ====== */
+/* Basis: zorg dat de viewport echt het hele scherm pakt op mobile */
+html, body {
+  min-height: 100svh;
+  height: 100dvh;           /* modern browsers */
+  background-color: #001d14; /* fallback donkergroen achter de afbeelding */
+}
+
+/* Default mobile portrait: gebruik de mobiele splash als achtergrond */
+@media (orientation: portrait) and (max-width: 480px) {
+  body.home-splash,
+  body.index-splash,
+  body {
+    background-image: url("/splash/home-mobile.png");
+    background-repeat: no-repeat;
+    background-position: right center;  /* focus op de tekstballon rechts */
+    background-size: contain;           /* snij niet af, toon volledig */
+    background-attachment: scroll;
+  }
+}
+
+/* iPhone 15/14/13 Pro Max en consorten (~19.5:9 en dunner) */
+@media (orientation: portrait) and (max-aspect-ratio: 9/19) {
+  body.home-splash,
+  body.index-splash,
+  body {
+    background-position: right center;
+    background-size: contain;
+  }
+}
+
+/* Veel Pixels (20:9) en vergelijkbare Androids */
+@media (orientation: portrait) and (max-aspect-ratio: 9/20) {
+  body.home-splash,
+  body.index-splash,
+  body {
+    background-position: right center;
+    background-size: contain;
+  }
+}
+
+/* Zorg dat landscape niet raar wordt; hou desktop splash of bestaande settings */
+@media (orientation: landscape) and (min-width: 768px) {
+  body.home-splash,
+  body.index-splash,
+  body {
+    background-image: url("/splash/home-desktop.png");
+    background-position: center center;
+    background-size: cover;
+  }
+}
