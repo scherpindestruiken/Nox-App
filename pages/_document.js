@@ -14,14 +14,14 @@ export default function Document() {
         {/* iPhone 15 Pro Max (1290x2796px) portrait */}
         <link
           rel="apple-touch-startup-image"
-          href="/splash/iphone15-splash.png"
+          href="/splash/iphone15-splash.png?v=20250829a"
           media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
         />
 
         {/* iPhone 15 Pro Max (2796x1290px) landscape */}
         <link
           rel="apple-touch-startup-image"
-          href="/splash/iphone15-splash-landscape.png"
+          href="/splash/iphone15-splash-landscape.png?v=20250829a"
           media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
         />
 
