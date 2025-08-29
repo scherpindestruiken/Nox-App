@@ -1,65 +1,52 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function NavBar() {
-  const [open, setOpen] = useState(false);
-
-  // Sluit het mobiele menu bij routewissel of resize
-  useEffect(() => {
-    const onResize = () => setOpen(false);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="nox-nav" role="banner">
-      <div className="nox-nav-inner">
-        {/* Brand: één enkele Link, geen Link-in-Link */}
-        <Link href="/" className="nox-brand" aria-label="Home">
-          {/* Next 13+/15 ondersteunt className direct op Link */}
-          <img
-            src="/icon-192.png"
-            alt="NOX"
-            width={32}
-            height={32}
-            className="nox-logo"
-            loading="eager"
-            decoding="async"
+    <header className="bg-black text-green-300 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center space-x-3" aria-label="Home">
+          <Image
+            src="/images/logo.png"
+            alt="NOX logo"
+            width={40}
+            height={40}
+            priority
           />
-          <span className="nox-title text-2xl font-bold hover:underline">
+          <span className="text-xl font-bold tracking-wide">
             Scherp in de Struiken
           </span>
         </Link>
 
-        {/* Hamburger */}
-        <button
-          className="nox-burger"
-          aria-label="Menu"
-          aria-expanded={open ? "true" : "false"}
-          onClick={() => setOpen(!open)}
-        >
-          <span className="sr-only">Open menu</span>
-          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-          </svg>
-        </button>
-
-        {/* Desktop links */}
-        <nav className="nox-links">
-          <Link href="/blog" className="nox-link">Blog</Link>
-          <Link href="/fotopagina" className="nox-link">Fotopagina</Link>
-          <Link href="/puzzelpagina" className="nox-link">Puzzelpagina</Link>
-          <Link href="/wedstrijd" className="nox-link">Wedstrijd</Link>
+        <nav className="hidden md:flex space-x-6">
+          <Link href="/" className="hover:text-white">Home</Link>
+          <Link href="/blog" className="hover:text-white">Blog</Link>
+          <Link href="/fotopagina" className="hover:text-white">Foto&apos;s</Link>
+          <Link href="/puzzelpagina" className="hover:text-white">Puzzel</Link>
+          <Link href="/wedstrijd" className="hover:text-white">Wedstrijd</Link>
         </nav>
+
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-800"
+          aria-label="Menu"
+        >
+          <span className="text-green-300">☰</span>
+        </button>
       </div>
 
-      {/* Mobiel dropdown */}
-      <div className={`nox-mobile ${open ? "open" : ""}`}>
-        <Link href="/blog" className="nox-link" onClick={() => setOpen(false)}>Blog</Link>
-        <Link href="/fotopagina" className="nox-link" onClick={() => setOpen(false)}>Fotopagina</Link>
-        <Link href="/puzzelpagina" className="nox-link" onClick={() => setOpen(false)}>Puzzelpagina</Link>
-        <Link href="/wedstrijd" className="nox-link" onClick={() => setOpen(false)}>Wedstrijd</Link>
-      </div>
+      {isOpen && (
+        <nav className="md:hidden bg-black px-4 pb-4 space-y-2">
+          <Link href="/" className="block hover:text-white">Home</Link>
+          <Link href="/blog" className="block hover:text-white">Blog</Link>
+          <Link href="/fotopagina" className="block hover:text-white">Foto&apos;s</Link>
+          <Link href="/puzzelpagina" className="block hover:text-white">Puzzel</Link>
+          <Link href="/wedstrijd" className="block hover:text-white">Wedstrijd</Link>
+        </nav>
+      )}
     </header>
   );
 }
