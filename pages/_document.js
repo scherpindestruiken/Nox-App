@@ -26,7 +26,7 @@ export default function Document() {
         />
 
         {/* Fallback voor andere devices */}
-        <link rel="apple-touch-startup-image" href="/splash/home-mobile.png" />
+        <link rel="apple-touch-startup-image" href="/splash/home-mobile.png?v=4" />
       </Head>
       <body>
         <Main />
