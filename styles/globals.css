@@ -44,3 +44,16 @@ a{color:inherit;text-decoration:none}
 .nox-mobile-link{display:block;color:var(--nox-ink)!important;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .nox-mobile-link:last-child{border-bottom:0}
 .nox-mobile-link:hover{color:var(--nox-ink-hover)!important}
+
+/* === Hardere mobiele focus overrides (iPhone/Pixel) === */
+@media (max-width: 768px){
+  .home-splash{ background-position:96% center !important; }
+}
+/* extreem smal/hoog (nieuwste iPhones/veel Pixels) */
+@media (max-width:768px) and (max-aspect-ratio: 9/20){
+  .home-splash{ background-position:98% center !important; }
+}
+/* iets minder extreem */
+@media (max-width:768px) and (min-aspect-ratio: 9/20) and (max-aspect-ratio: 9/18){
+  .home-splash{ background-position:94% center !important; }
+}
