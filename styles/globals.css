@@ -108,3 +108,27 @@ html, body {
     background-size: cover;
   }
 }
+
+/* === Mobile splash fix overrides (onderaan bestand) === */
+body.home-splash {
+  /* forceer fullscreen en één achtergrond */
+  min-height: 100svh;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* minder jank op iOS */
+  background-size: cover;        /* vul het scherm, eventueel beetje croppen */
+  background-position: right 18% center; /* schuif onderwerp uit de rand */
+}
+
+/* Extra duwtje op hele smalle telefoons (iPhone 15/Pixel) */
+@media (max-aspect-ratio: 10/19) {
+  body.home-splash {
+    background-position: right 28% center;
+  }
+}
+
+/* Brede schermen (landscape/desktop) – weer iets naar rechts */
+@media (min-aspect-ratio: 19/10) {
+  body.home-splash {
+    background-position: right 12% center;
+  }
+}
