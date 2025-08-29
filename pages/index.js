@@ -1,31 +1,19 @@
 import Head from "next/head";
-
-export default function Home() {
+export default function Home(){
   return (
     <>
-      <Head>
-        <title>Scherp in de Struiken</title>
-        <meta name="description" content="NOX — Scherp in de Struiken" />
-      </Head>
-
+      <Head><title>Scherp in de Struiken</title></Head>
       <section className="hero" aria-label="Splash">
-        <picture>
-          {/* Mobiel: eigen afbeelding */}
-          <source media="(max-width: 767px)" srcSet="/images/NOX_home.png" />
-          {/* Desktop fallback */}
-          <img
-            src="/images/NOX_home_desktop.png"
-            alt="Scherp in de Struiken"
-            className="hero-bg"
-          />
-        </picture>
-        {/* Als je per se een HTML titel wilt op desktop, zet deze aan: */}
-        {/* <h1 className="hero-title desktop-only">Scherp in de Struiken</h1> */}
+        <img
+          src="/images/home-desktop.png?v=desk-test"
+          alt="Scherp in de Struiken"
+          className="hero-bg"
+          onError={(e)=>{e.currentTarget.replaceWith(Object.assign(document.createElement('div'),{style:"color:#fff;padding:24px",innerText:"/images/home-desktop.png kon niet laden"}));}}
+        />
       </section>
-
-      {/* Content onder splash; spacer voorkomt overlap met fixed nav op kleine schermen */}
       <main className="container">
-        <p>Welkom. Als je dit leest is het tenminste niet meer zwart.</p>
+        <p>Als je hier géén afbeelding ziet, ligt het niet aan CSS maar aan het bestand of pad.</p>
+        <p>Open ook <a href="/debug-image">/debug-image</a> voor statuscodes.</p>
       </main>
     </>
   );
