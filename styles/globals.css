@@ -1,628 +1,97 @@
-:root{
-  --bg:#000;
-  --text:#eaeaea;
-  --muted:#cfd3d6;
-
-  --green-900:#0b241c;
-  --green-850:#0f2f24;
-  --green-800:#12362a;
-  --green-700:#1a4b3a;
-  --green-600:#2a6d57;
-
-  --bar-bg:var(--green-850);
-  --bar-active:var(--green-800);
-  --bar-hover:rgba(255,255,255,.06);
-  --bar-border:rgba(255,255,255,.08);
-
-  --focus:#8fb3ff;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-
-  --nav-h:56px;
-  --radius:12px;
-  --radius-sm:9px;
-  --fs-base:15px;
-  --font:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+/* Reset margins */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000; /* zwart als default */
 }
 
-*,*::before,*::after{box-sizing:border-box}
-html,body,#__next{height:100%;margin:0;padding:0}
-body{
-  font-family:var(--font);
-  font-size:var(--fs-base);
-  color:var(--text);
-  background:var(--bg);
-  background-position:center center;
-  background-repeat:no-repeat;
-  background-size:cover;
-}
-@media (min-aspect-ratio:4/3),(min-width:1024px){
-  body{background-image:url("/splash/splash-desktop-1920x1080.png")}
-}
-main{min-height:calc(100vh - var(--nav-h))}
-@supports (height:100dvh){
-  main{min-height:calc(100dvh - var(--nav-h))}
-}
-a{text-decoration:none;color:inherit}
-
-.nav-root{
-  position:sticky;top:0;z-index:50;height:var(--nav-h);
-  display:grid;align-items:center;isolation:isolate;
-  border-bottom:1px solid var(--bar-border);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-}
-.nav-bg{
-  position:absolute;inset:0;z-index:-1;
-  background:
-    radial-gradient(120% 160% at 10% -20%, rgba(46,87,74,.25) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(130% 190% at 90% 120%, rgba(30,70,55,.20) 0%, rgba(0,0,0,0) 65%),
-    linear-gradient(0deg, rgba(255,255,255,.04), rgba(255,255,255,.04)),
-    var(--bar-bg);
-  background-blend-mode:soft-light,soft-light,overlay,normal;
-}
-@supports (backdrop-filter:blur(6px)){
-  .nav-bg{backdrop-filter:saturate(115%) blur(6px);-webkit-backdrop-filter:saturate(115%) blur(6px)}
-}
-.nav-inner{
-  max-width:1100px;margin:0 auto;padding:8px 16px;
-  display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;
-}
-.brand{display:inline-flex;align-items:center;gap:10px;color:#f4f7f6;opacity:.98}
-.brand:hover{opacity:1}
-.brand-logo-wrap{
-  display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
-  box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06) inset;
-}
-.brand-icon{
-  width:26px;height:26px;border-radius:6px;object-fit:cover;
-  filter:saturate(1.05) hue-rotate(340deg) contrast(1.02);
-  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset, 0 0 10px rgba(42,109,87,.35);
-}
-.brand-name{font-weight:600;letter-spacing:.2px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
-
-.nav-links{display:none;gap:6px;align-items:center}
-.nav-link{
-  position:relative;display:inline-flex;align-items:center;
-  padding:8px 12px;border-radius:var(--radius-sm);color:#ecf2ef;opacity:.94
-}
-.nav-link:hover{background:var(--bar-hover);opacity:1}
-.nav-link:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.nav-link .nav-link-label{position:relative;padding-bottom:2px}
-.nav-link .nav-link-label::after{
-  content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:transparent;
-  transform:scaleX(0);transform-origin:center;transition:transform .22s ease, background-color .22s ease
-}
-.nav-link:hover .nav-link-label::after{background:var(--green-700);transform:scaleX(1)}
-.nav-link.active{background:var(--bar-active);color:#fff}
-.nav-link.active .nav-link-label::after{background:var(--green-600);transform:scaleX(1)}
-
-.nav-mobile{position:relative}
-.hamburger{
-  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;
-  background:rgba(255,255,255,.06);color:#f4f7f6;border:1px solid var(--bar-border);cursor:pointer
-}
-.hamburger:hover{background:rgba(255,255,255,.10)}
-.hamburger:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-
-.mobile-panel{
-  position:absolute;right:0;top:calc(100% + 8px);min-width:220px;background:var(--green-900);
-  border:1px solid var(--bar-border);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow);
-  display:grid;gap:4px;transform:translateY(-6px);opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease
-}
-.mobile-panel.open{transform:translateY(0);opacity:1;pointer-events:auto}
-.mobile-link{padding:10px 12px;border-radius:var(--radius-sm);color:#ecf2ef}
-.mobile-link:hover{background:rgba(255,255,255,.06)}
-.mobile-link.active{background:var(--bar-active)}
-
-@media (min-width:860px){
-  .nav-links{display:inline-flex}
-  .nav-mobile{display:none}
-}
-::selection{background:rgba(42,109,87,.35);color:#fff}
-
-/* ===========================
-   NOX: Menu-ink override (20250828_155548)
-   Gepipetteerde tint uit splash-tekst
-   =========================== */
-:root{
-  --menu-ink: #8C8952;
-}
-
-.nav-link,
-.nav-link:visited,
-.mobile-link,
-.mobile-link:visited,
-.brand-name{
-  color: var(--menu-ink) !important;
-}
-
-/* Hover: subtiel lichter via text-shadow, geen schreeuwerige kleurwissel */
-.nav-link:hover .nav-link-label,
-.mobile-link:hover{
-  text-shadow: 0 0 6px rgba(140,137,82,0.35);
-}
-
-/* Active state: zelfde inktkleur met onderlijntje voor feedback */
-.nav-link.active .nav-link-label,
-.mobile-link.active{
+/* Splashscreen */
+#splash {
   position: relative;
-}
-.nav-link.active .nav-link-label::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:-3px; height:2px;
-  background: var(--menu-ink);
-  transform: none;
-}
-
-/* Brandnaam ietsje duidelijker zonder de kleur kwijt te raken */
-.brand-name{
-  font-weight: 600;
-  letter-spacing: .2px;
-  text-shadow: 0 1px 1px rgba(0,0,0,.35);
-}
-
-/* ============== NOX Forest Page BG ==============
-   Bos-achtergrond voor alle pagina’s (zonder splash/wasbeer).
-   Laagjes: diepgroen vlak + twee zachte radials (mist/licht).
-   ================================================= */
-body{
-  /* basis */
-  background: #0b241c; /* fallback */
-  /* gelaagd bosgevoel */
-  background:
-    radial-gradient(130% 80% at 15% 10%, rgba(53,89,73,0.20) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(110% 70% at 85% 90%, rgba(35,70,55,0.18) 0%, rgba(0,0,0,0) 65%),
-    linear-gradient(180deg, #0f2f24 0%, #0b241c 60%, #0a2019 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background: url("/images/NOX_home_desktop.png") no-repeat center center;
   background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* iets meer diepte op grote schermen */
-@media (min-width: 1024px){
-  body{
-    background:
-      radial-gradient(120% 90% at 12% 0%, rgba(60,96,80,0.18) 0%, rgba(0,0,0,0) 60%),
-      radial-gradient(120% 100% at 90% 110%, rgba(40,80,65,0.16) 0%, rgba(0,0,0,0) 70%),
-      linear-gradient(180deg, #0f2f24 0%, #0b241c 55%, #0a2019 100%);
-  }
-}
-
-/* =========================
-   NOX backgrounds + heading ink (20250828_160206)
-   ========================= */
-
-/* Inktkleur uit splash voor headings ook */
-:root{
-  --menu-ink: #8C8952;
-  --heading-ink: var(--menu-ink);
-}
-
-/* Default: forest gradient voor ALLE pagina's */
-body{
-  background: #0b241c;
-  background:
-    radial-gradient(130% 80% at 15% 10%, rgba(53,89,73,0.20) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(110% 70% at 85% 90%, rgba(35,70,55,0.18) 0%, rgba(0,0,0,0) 65%),
-    linear-gradient(180deg, #0f2f24 0%, #0b241c 60%, #0a2019 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* Home: vervang door de splash-afbeelding */
-body.home-splash{
-  background-image: url("/splash/splash-iphone15-v3.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: scroll;
-}
-
-@media (min-aspect-ratio:4/3),(min-width:1024px){
-  body.home-splash{
-    background-image: url("/splash/splash-desktop-1920x1080.png");
-  }
-}
-
-/* Headings in zelfde kleur als navigatie-inktkleur */
-h1,h2,h3,h4{
-  color: var(--heading-ink);
-  text-shadow: 0 1px 1px rgba(0,0,0,.28);
-}
-
-/* ===== NOX navbar (donkergroen + NOX-goud) ===== */
-:root {
-  --nox-green: #0b2d26;   /* bos-donkergroen */
-  --nox-green-80: #0b2d26cc;
-  --nox-gold:  #d0c38d;   /* tekstkleur zoals splash-titel */
-  --nox-gold-2:#e7dba7;
-  --nox-border:#1a3a33;
-}
-
+/* NavBar styling */
 .nox-nav {
-  position: sticky;
+  position: absolute;   /* bovenop splashscreen */
   top: 0;
-  z-index: 50;
-  background: var(--nox-green-80);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--nox-border);
+  left: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;  /* geen extra balk */
+  box-shadow: none;
 }
 
 .nox-nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 10px 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .nox-brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
   text-decoration: none;
-}
-
-.nox-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(208, 195, 141, 0.15);
 }
 
 .nox-title {
-  color: var(--nox-gold);
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f2f2f2; /* lichte letters op donkere achtergrond */
 }
 
-.nox-links {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.nox-links a {
-  color: var(--nox-gold);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.nox-links a:hover {
-  color: var(--nox-gold-2);
-  text-shadow: 0 0 8px rgba(231, 219, 167, 0.35);
-}
-
-/* Paginawrap houdt je bestaande groene achtergrond in beeld */
-.nox-page {
-  min-height: calc(100vh - 64px);
-}
-
-/* Build-label onderin */
-.nox-build {
-  color: rgba(231, 219, 167, 0.75);
-  font-size: 12px;
-  text-align: center;
-  padding: 12px 0 18px;
-}
-@media (max-width: 640px) {
-  .nox-logo { width: 30px; height: 30px; }
-  .nox-title { font-size: 0.95rem; }
-  .nox-links { gap: 12px; font-size: 0.95rem; }
-}
-
-/* ===== NOX NAV met hamburger ===== */
-:root{
-  --nox-green: #0b2d26;
-  --nox-green-80: #0b2d26cc;
-  --nox-border:#1a3a33;
-  --nox-ink: #8C8952;      /* splash-inkt */
-  --nox-ink-2:#e7dba7;
-}
-
-.nox-nav{
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--nox-green-80);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--nox-border);
-}
-
-.nox-nav-inner{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 10px 16px;
+.nox-menu {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 1rem;
 }
 
-.nox-brand{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+.nox-link {
+  color: #f2f2f2;
   text-decoration: none;
+  font-weight: 500;
 }
 
-.nox-logo{
-  width: 36px; height: 36px; border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(208,195,141,.15);
+.nox-link:hover {
+  text-decoration: underline;
 }
 
-.nox-title{
-  color: var(--nox-ink);
-  font-weight: 700;
-  letter-spacing: .3px;
-  white-space: nowrap;
-}
-
-/* Desktop menu */
-.nox-links{
+/* Mobile menu */
+.nox-burger {
   display: none;
-  gap: 16px;
-}
-.nox-links a{
-  color: var(--nox-ink);
-  text-decoration: none;
-  font-weight: 600;
-}
-.nox-links a:hover{ color: var(--nox-ink-2); text-shadow: 0 0 8px rgba(231,219,167,.35); }
-.nox-links a.active{
-  border-bottom: 2px solid var(--nox-ink);
-  padding-bottom: 2px;
 }
 
-/* Hamburger knop (mobile) */
-.nox-burger{
-  display: inline-flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 40px; height: 36px;
-  align-items: center; justify-content: center;
-  background: transparent; border: 0; cursor: pointer;
-}
-.nox-burger-bar{
-  width: 22px; height: 2px; background: var(--nox-ink);
-  display: block;
-}
-
-/* Mobiele menu overlay */
-.nox-mobile{
-  display: none;
-  position: fixed; inset: 56px 0 0 0;
-  background: rgba(11,45,38,0.95);
-  backdrop-filter: blur(6px);
-  padding: 16px;
-  border-top: 1px solid var(--nox-border);
-}
-.nox-mobile a{
-  display: block;
-  color: var(--nox-ink);
-  font-size: 1.1rem;
-  text-decoration: none;
-  padding: 12px 4px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.nox-mobile a:last-child{ border-bottom: 0; }
-.nox-mobile a.active{ color: var(--nox-ink-2); }
-
-.nox-mobile.open{ display: block; }
-
-/* Desktop breakpoint */
-@media (min-width: 900px){
-  .nox-burger{ display: none; }
-  .nox-links{ display: inline-flex; }
-  .nox-mobile{ display: none !important; }
-}
-
-/* Page + footer */
-.nox-page{ min-height: calc(100vh - 64px); }
-.nox-build{
-  color: rgba(231,219,167,.75);
-  font-size: 12px; text-align: center; padding: 12px 0 18px;
-}
-
-/* ========= Achtergronden per pagina-type ========= */
-:root {
-  --nox-green: #0b2d26;
-}
-
-/* Default voor ALLES behalve home: donkergroen */
-.page-default {
-  min-height: calc(100vh - 64px);
-  background: var(--nox-green);
-  background-attachment: fixed;
-}
-
-/* Home: wasbeer-splash (mobiel) */
-.page-home {
-  min-height: calc(100vh - 64px);
-  background:
-    url("/splash/splash-iphone15-v2.png") center center / cover no-repeat fixed,
-    var(--nox-green);
-}
-
-/* Home: desktop krijgt de brede desktop-afbeelding */
-@media (min-width: 900px) {
-  .page-home {
-    background:
-      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
-      var(--nox-green);
+@media (max-width: 768px) {
+  .nox-menu {
+    display: none;
+  }
+  .nox-burger {
+    display: block;
+    background: none;
+    border: none;
+  }
+  .nox-mobile {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+  }
+  .nox-mobile.open {
+    display: flex;
+  }
+  .nox-mobile-link {
+    color: #fff;
+    padding: 0.5rem 0;
+    text-decoration: none;
   }
 }
-
-/* Zorg dat content leesbaar is op de home-splash */
-.page-home .nox-section,
-.page-home .nox-card,
-.page-home .content,
-.page-home article {
-  background: rgba(0,0,0,0.0); /* transparant; zet hier evt. een lichte overlay als je tekst wegvalt */
-}
-
-/* Extra veiligheid: body niet overrulen door oudere regels */
-body {
-  background: var(--nox-green);
-}
-
-/* ===== Fix: mobiele home-splash zonder 'fixed' (iOS-bug) ===== */
-:root {
-  --nox-green: #0b2d26;
-}
-
-/* Zorg dat de pagina echt de hoogte pakt, ook op iOS met dynamische toolbars */
-html, body { height: 100%; }
-
-/* Baseline voor alle pagina's */
-.nox-page {
-  min-height: calc(100svh - 64px); /* small viewport unit voor mobiele browsers */
-}
-
-/* Home: gebruik de juiste mobiele splash (v3), zonder 'fixed' */
-.page-home {
-  background:
-    url("/splash/splash-iphone15-v3.png") center center / cover no-repeat,
-    var(--nox-green);
-}
-
-/* Subpagina's: donkergroen */
-.page-default {
-  background: var(--nox-green);
-}
-
-/* Desktop: geef home wél 'fixed' en de brede desktop-afbeelding */
-@media (min-width: 900px) {
-  .page-home {
-    background:
-      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
-      var(--nox-green);
-  }
-}
-
-/* ===== iOS fix: home achtergrond op body in plaats van alleen op main ===== */
-:root {
-  --nox-green: #0b2d26;
-}
-
-/* Zorg dat we volledige viewporthoogte benutten, ook op iOS met dynamische balken */
-html, body { min-height: 100%; }
-.nox-page { min-height: calc(100svh - 64px); }
-
-/* Subpagina's blijven donkergroen */
-.page-default {
-  background: var(--nox-green);
-}
-
-/* Home op MOBIEL: geen 'fixed', iOS lust dat niet. */
-/* We zetten de achtergrond op body.home-body, zodat iOS standalone 'm toont. */
-body.home-body {
-  background:
-    url("/splash/splash-iphone15-v3.png") center center / cover no-repeat,
-    var(--nox-green);
-  /* WebKit hints (zijn meestal niet nodig, maar kan helpen) */
-  -webkit-background-size: cover;
-  background-attachment: scroll;
-}
-
-/* Desktop: brede achtergrond + mag 'fixed' */
-@media (min-width: 900px) {
-  body.home-body {
-    background:
-      url("/splash/splash-desktop-1920x1080.png") center center / cover no-repeat fixed,
-      var(--nox-green);
-  }
-}
-
-/* Zorg dat content geen achtergrond over de foto legt op home */
-.page-home .nox-section,
-.page-home .nox-card,
-.page-home .content,
-.page-home article {
-  background: transparent;
-}
-
-/* ===== NOX NAV OVERLAY ===================================================== */
-:root{
-  --nox-brand-title: #e9d79b;
-  --nox-link:        #e9d79b;
-  --nox-link-hover:  #ffffff;
-  --nox-border:      rgba(255,255,255,.12);
-}
-.nox-nav{
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 50;
-  background: transparent !important;
-}
-.nox-nav-inner{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:24px; padding:12px 16px; width:min(1200px,94vw); margin:0 auto;
-}
-.nox-brand{display:inline-flex; align-items:center; gap:10px; text-decoration:none;}
-.nox-title{font-weight:800; letter-spacing:.2px; color:var(--nox-brand-title)!important;}
-
-.nox-menu{display:none; gap:18px; align-items:center;}
-@media (min-width: 840px){ .nox-menu{display:inline-flex} }
-
-.nox-link{
-  color:var(--nox-link)!important; text-decoration:none;
-  padding:6px 10px; border-radius:8px;
-  transition:color .15s ease, background .15s ease;
-}
-.nox-link:hover{ color:var(--nox-link-hover)!important; background:rgba(255,255,255,.10); }
-
-.nox-burger{
-  display:inline-flex; gap:4px; background:transparent;
-  border:1px solid var(--nox-border); border-radius:8px; padding:6px 10px;
-}
-.nox-burger-bar{ width:16px; height:2px; background:var(--nox-link); display:block; }
-@media (min-width: 840px){ .nox-burger{display:none} }
-
-.nox-mobile{
-  display:none; background:rgba(0,0,0,.45); backdrop-filter:blur(6px);
-  border-top:1px solid var(--nox-border); padding:8px 16px 12px;
-}
-.nox-mobile.open{ display:block; }
-.nox-mobile-link{ display:block; color:var(--nox-link)!important; padding:8px 0; text-decoration:none; }
-.nox-mobile-link:hover{ color:var(--nox-link-hover)!important; }
-/* ========================================================================== */
-
-/* ===== HERO / SPLASH ====================================================== */
-.hero{ position:relative; min-height: 88vh; width:100%; overflow:hidden; }
-.hero-img{ object-fit: cover; object-position: center; }
-.hero-title{
-  position:absolute; inset:auto 0 6vh 0;
-  text-align:center; font-weight:800; letter-spacing:.02em;
-  color:#e9d79b; text-shadow: 0 2px 8px rgba(0,0,0,.45);
-  font-size: clamp(28px, 6vw, 72px);
-  margin:0;
-}
-/* Op mobiel staat de tekst al in de afbeelding. Verberg de HTML-titel. */
-@media (max-width: 767px){
-  .hero-title{ display:none; }
-}
-
-/* Container onder de hero (optioneel) */
-.container{ width:min(1100px, 92vw); margin: 24px auto; color:#e9e9e9; }
-
-/* Zorg dat de nav als overlay bovenop de hero staat (reeds ingesteld) */
-body{ background: #0d1e1a; }
-
-/* --- hard kill dubbele titels op mobiel --- */
-@media (max-width: 767px){
-  .hero h1,
-  .hero .hero-title,
-  .splash h1,
-  .splash .hero-title,
-  .home h1,
-  .home .hero-title {
-    display: none !important;
-    visibility: hidden !important;
-  }
-}
-/* bust 1756466369 */
