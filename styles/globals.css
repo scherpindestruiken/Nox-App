@@ -1,134 +1,121 @@
-*,*::before,*::after{box-sizing:border-box}
-html,body{height:100%;margin:0;padding:0;background:#000;color:#e9e9e9;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
-a{color:inherit;text-decoration:none}
-
-/* kleurvariabelen */
-:root{
-  --nox-title:#e9d79b;
-  --nox-ink:#e9d79b;
-  --nox-ink-hover:#fff;
-  --nox-brd:rgba(255,255,255,.12);
+/* ====== BASIS ====== */
+:root {
+  --ink: #0a2e12;           /* donkere groentint voor tekst/links */
+  --ink-contrast: #ffffff;  /* witte variant, indien nodig */
 }
 
-/* hero: gebruik 100svh i.p.v. 100vh voor iOS-chrome/safari chrome bars */
-.hero{position:relative;width:100%;height:100svh;min-height:100vh;overflow:hidden}
-.hero picture,.hero img{display:block;width:100%;height:100%}
-.hero-bg{width:100%;height:100%;object-fit:cover;object-position:center}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 
-/* op mobiel iets meer focus naar links als nodig */
-@media (max-width: 767px){
-  .hero-bg{ object-position: 20% center; }
-}
-
-/* content container */
-.container{width:min(1100px,92vw);margin:24px auto}
-
-/* screenreader-only */
-.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-
-/* Nav overlay (verwacht dat je NavBar component al is toegevoegd in _app.js) */
-.nox-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0));padding-top:env(safe-area-inset-top)}
-.nox-nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 16px;width:min(1200px,94vw);margin:0 auto}
-.nox-brand{display:inline-flex;align-items:center;gap:10px}
-.nox-logo{width:40px;height:40px;object-fit:contain}
-.nox-title{font-weight:800;letter-spacing:.2px;color:var(--nox-title)!important}
-.nox-menu{display:none;gap:18px;align-items:center}
-@media (min-width:840px){.nox-menu{display:inline-flex}}
-.nox-link{color:var(--nox-ink)!important;text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .15s,background .15s}
-.nox-link:hover{color:var(--nox-ink-hover)!important;background:rgba(255,255,255,.10)}
-.nox-burger{display:inline-flex;flex-direction:column;gap:4px;background:transparent;border:1px solid var(--nox-brd);border-radius:10px;padding:8px 10px}
-.nox-burger-bar{width:18px;height:2px;background:var(--nox-ink)}
-@media (min-width:840px){.nox-burger{display:none}}
-.nox-mobile{display:none;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);border-top:1px solid var(--nox-brd);padding:10px 16px;margin-top:4px}
-.nox-mobile.open{display:block}
-.nox-mobile-link{display:block;color:var(--nox-ink)!important;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.nox-mobile-link:last-child{border-bottom:0}
-.nox-mobile-link:hover{color:var(--nox-ink-hover)!important}
-
-/* === Hardere mobiele focus overrides (iPhone/Pixel) === */
-@media (max-width: 768px){
-  .home-splash{ background-position:96% center !important; }
-}
-/* extreem smal/hoog (nieuwste iPhones/veel Pixels) */
-@media (max-width:768px) and (max-aspect-ratio: 9/20){
-  .home-splash{ background-position:98% center !important; }
-}
-/* iets minder extreem */
-@media (max-width:768px) and (min-aspect-ratio: 9/20) and (max-aspect-ratio: 9/18){
-  .home-splash{ background-position:94% center !important; }
-}
-/* ====== MOBILE SPLASH FIX (iPhone/Pixel portrait) ====== */
-/* Basis: zorg dat de viewport echt het hele scherm pakt op mobile */
-html, body {
+body {
+  margin: 0;
+  color: var(--ink);
+  /* Zorg dat we echt de volle viewport krijgen (iOS/Android verschillen) */
   min-height: 100svh;
-  height: 100dvh;           /* modern browsers */
-  background-color: #001d14; /* fallback donkergroen achter de afbeelding */
+  min-height: 100dvh;
+  background: #000; /* fallback tijdens eerste paint */
 }
 
-/* Default mobile portrait: gebruik de mobiele splash als achtergrond */
-@media (orientation: portrait) and (max-width: 480px) {
-  body.home-splash,
-  body.index-splash,
-  body {
+/* ====== NAVBALK TRANSPARANT BOVENOP ====== */
+.nox-nav {
+  position: fixed;
+  top: env(safe-area-inset-top);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: calc(8px + env(safe-area-inset-top)) 16px 8px 16px;
+  background: transparent;        /* geen groene strip meer */
+  color: var(--ink-contrast);
+}
+.nox-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.nox-brand img { width: 36px; height: 36px; display: block; }
+.nox-title { font-weight: 800; font-size: clamp(18px, 2.5vw, 24px); color: #fff; }
+.nox-links { margin-left: auto; display: flex; gap: clamp(8px, 2vw, 20px); }
+.nox-link { color: #fff; text-decoration: none; font-weight: 600; }
+.nox-link:hover { text-decoration: underline; }
+
+/* ====== SPLASH/HEADING ACHTERGROND ======
+   We leggen een vaste achtergrondlaag die het hele scherm bedekt,
+   met focus naar RECHTS zodat de tekstballon niet half buiten beeld valt.
+*/
+.home-hero {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-position: right center; /* focus rechts */
+  background-size: cover;
+  /* Desktop default */
+  background-image: image-set(
+    url("/images/home-desktop.png") type("image/png")
+  );
+  /* fallback als image-set niet wordt ondersteund */
+  background-image: url("/images/home-desktop.png");
+}
+
+/* Content boven de hero */
+.home-content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(64px + env(safe-area-inset-top)); /* ruimte voor nav */
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* ====== MOBIEL/SMALLER: gebruik mobiele splash en nog wat extra focus rechts ====== */
+/* Heel smal (moderne telefoons ~19.5:9 of smaller) */
+@media (max-aspect-ratio: 9/19) {
+  .home-hero {
+    background-image: image-set(
+      url("/splash/home-mobile.png") type("image/png")
+    );
     background-image: url("/splash/home-mobile.png");
-    background-repeat: no-repeat;
-    background-position: right center;  /* focus op de tekstballon rechts */
-    background-size: contain;           /* snij niet af, toon volledig */
-    background-attachment: scroll;
+    background-position: calc(100% - 8%) center; /* beetje naar links van helt rechts, zodat ballon netjes valt */
+    background-size: cover; /* vul scherm, snij links af indien nodig */
   }
 }
 
-/* iPhone 15/14/13 Pro Max en consorten (~19.5:9 en dunner) */
-@media (orientation: portrait) and (max-aspect-ratio: 9/19) {
-  body.home-splash,
-  body.index-splash,
-  body {
-    background-position: right center;
-    background-size: contain;
-  }
-}
-
-/* Veel Pixels (20:9) en vergelijkbare Androids */
-@media (orientation: portrait) and (max-aspect-ratio: 9/20) {
-  body.home-splash,
-  body.index-splash,
-  body {
-    background-position: right center;
-    background-size: contain;
-  }
-}
-
-/* Zorg dat landscape niet raar wordt; hou desktop splash of bestaande settings */
-@media (orientation: landscape) and (min-width: 768px) {
-  body.home-splash,
-  body.index-splash,
-  body {
-    background-image: url("/splash/home-desktop.png");
-    background-position: center center;
+/* Klassieke 16:9 telefoons of iets breder */
+@media (max-aspect-ratio: 9/16) and (min-aspect-ratio: 9/19) {
+  .home-hero {
+    background-image: image-set(
+      url("/splash/home-mobile.png") type("image/png")
+    );
+    background-image: url("/splash/home-mobile.png");
+    background-position: calc(100% - 10%) center;
     background-size: cover;
   }
 }
 
-/* === Mobile splash fix overrides (onderaan bestand) === */
-body.home-splash {
-  /* forceer fullscreen en één achtergrond */
-  min-height: 100svh;
-  background-repeat: no-repeat;
-  background-attachment: scroll; /* minder jank op iOS */
-  background-size: cover;        /* vul het scherm, eventueel beetje croppen */
-  background-position: right 18% center; /* schuif onderwerp uit de rand */
-}
-
-/* Extra duwtje op hele smalle telefoons (iPhone 15/Pixel) */
-@media (max-aspect-ratio: 10/19) {
-  body.home-splash {
-    background-position: right 28% center;
+/* Heel brede/landscape situaties: pak desktop-splash met focus rechts */
+@media (orientation: landscape) and (min-aspect-ratio: 16/10) {
+  .home-hero {
+    background-image: image-set(
+      url("/splash/splash-desktop-1920x1080.png") type("image/png")
+    );
+    background-image: url("/splash/splash-desktop-1920x1080.png");
+    background-position: right center;
+    background-size: cover;
   }
 }
 
-/* Brede schermen (landscape/desktop) – weer iets naar rechts */
-@media (min-aspect-ratio: 19/10) {
-  body.home-splash {
-    background-position: right 12% center;
-  }
+/* ====== VOETTEKST OP MOBIEL NIET DUBBEL ====== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 24px 16px max(24px, env(safe-area-inset-bottom));
+  color: #fff;
+  text-align: center;
 }
+@media (max-width: 480px) {
+  .site-footer .only-desktop { display: none !important; }
+}
+
+/* ====== HULPKLASSES ====== */
+.container { max-width: 1100px; margin: 0 auto; }
+.hidden { display: none; }
