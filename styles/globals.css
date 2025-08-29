@@ -1,97 +1,89 @@
-/* Reset margins */
-html, body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Algemene body-styling */
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background: #000; /* zwart als default */
+  font-family: 'Inter', sans-serif;
+  background-color: #000; /* fallback zwart */
+  color: #fff;
 }
 
-/* Splashscreen */
-#splash {
+/* Splashscreen achtergrond */
+.splash-screen {
   position: relative;
-  width: 100%;
   height: 100vh;
-  background: url("/images/NOX_home_desktop.png") no-repeat center center;
+  width: 100%;
+  background: url('/images/NOX_home.png') no-repeat center center;
   background-size: cover;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* NavBar styling */
+/* Titel op splashscreen */
+.splash-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  z-index: 10;
+  margin: 0;
+}
+
+/* NavBar bovenop splashscreen */
 .nox-nav {
-  position: absolute;   /* bovenop splashscreen */
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  padding: 0.5rem 1rem;
+  width: 100%;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: transparent;  /* geen extra balk */
-  box-shadow: none;
+  background: transparent; /* geen aparte balk */
+  z-index: 20;
 }
 
-.nox-nav-inner {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+/* Logo */
+.nox-logo {
+  height: 48px;
+  width: auto;
 }
 
-.nox-brand {
+/* Navigatie links */
+.nox-links {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
+}
+
+.nox-links a {
+  color: #f5f5f5;
+  font-size: 1.1rem;
+  font-weight: 600;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
-.nox-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #f2f2f2; /* lichte letters op donkere achtergrond */
+.nox-links a:hover {
+  color: #8fd694; /* groen accent */
 }
 
-.nox-menu {
-  display: flex;
-  gap: 1rem;
-}
-
-.nox-link {
-  color: #f2f2f2;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nox-link:hover {
-  text-decoration: underline;
-}
-
-/* Mobile menu */
-.nox-burger {
-  display: none;
-}
-
+/* Mobiel */
 @media (max-width: 768px) {
-  .nox-menu {
-    display: none;
+  .splash-title {
+    font-size: 1.8rem;
+    padding: 0 1rem;
   }
-  .nox-burger {
-    display: block;
-    background: none;
-    border: none;
+
+  .nox-links {
+    gap: 1rem;
   }
-  .nox-mobile {
-    display: none;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 1rem;
-  }
-  .nox-mobile.open {
-    display: flex;
-  }
-  .nox-mobile-link {
-    color: #fff;
-    padding: 0.5rem 0;
-    text-decoration: none;
+
+  .nox-links a {
+    font-size: 1rem;
   }
 }
