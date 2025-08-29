@@ -591,3 +591,24 @@ body.home-body {
 .nox-mobile-link{ display:block; color:var(--nox-link)!important; padding:8px 0; text-decoration:none; }
 .nox-mobile-link:hover{ color:var(--nox-link-hover)!important; }
 /* ========================================================================== */
+
+/* ===== HERO / SPLASH ====================================================== */
+.hero{ position:relative; min-height: 88vh; width:100%; overflow:hidden; }
+.hero-img{ object-fit: cover; object-position: center; }
+.hero-title{
+  position:absolute; inset:auto 0 6vh 0;
+  text-align:center; font-weight:800; letter-spacing:.02em;
+  color:#e9d79b; text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  font-size: clamp(28px, 6vw, 72px);
+  margin:0;
+}
+/* Op mobiel staat de tekst al in de afbeelding. Verberg de HTML-titel. */
+@media (max-width: 767px){
+  .hero-title{ display:none; }
+}
+
+/* Container onder de hero (optioneel) */
+.container{ width:min(1100px, 92vw); margin: 24px auto; color:#e9e9e9; }
+
+/* Zorg dat de nav als overlay bovenop de hero staat (reeds ingesteld) */
+body{ background: #0d1e1a; }
